@@ -2,17 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality
+namespace SAE.GAD176.P1.EnemyAI
 {
-    // Start is called before the first frame update
-    void Start()
+    public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality
     {
+        [SerializeField] private IdleStateManager idleState;
+        [SerializeField] private PlayerSightedChecker playerSightedChecker;
+        [SerializeField] private FleeStateManager fleeState;
+        [SerializeField] private HealthManager healthManager;
         
-    }
+        public void IdleState()
+        {
+            idleState.BeginWalkCycle();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        public abstract void AttackState();
+
+        public void FleeState()
+        {
+
+        }
+
+        public void CallSetHealth()
+        {
+
+        }
+
+        public void DestroySelf()
+        {
+
+        }
     }
 }

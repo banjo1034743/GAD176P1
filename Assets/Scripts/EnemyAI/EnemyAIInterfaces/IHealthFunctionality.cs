@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IHealthFunctionality
+namespace SAE.GAD176.P1.EnemyAI
 {
-
+    public interface IHealthFunctionality
+    {
+        public void CallSetHealth();
+    }
 }
