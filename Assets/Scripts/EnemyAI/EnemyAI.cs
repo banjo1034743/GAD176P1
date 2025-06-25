@@ -6,14 +6,19 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality
     {
-        [SerializeField] private IdleStateManager idleState;
-        [SerializeField] private PlayerSightedChecker playerSightedChecker;
-        [SerializeField] private FleeStateManager fleeState;
-        [SerializeField] private HealthManager healthManager;
+        [SerializeField] protected IdleStateManager idleState;
+        [SerializeField] protected PlayerSightedChecker playerSightedChecker;
+        [SerializeField] protected FleeStateManager fleeState;
+        [SerializeField] protected HealthManager healthManager;
+
+        protected bool isIdleStateEnabled = false;
         
         public void IdleState()
         {
-            idleState.BeginWalkCycle();
+            DisableStates();
+            isIdleStateEnabled = true;
+
+            StartCoroutine(idleState.BeginWalkCycle(isIdleStateEnabled));
         }
 
         public abstract void AttackState();
@@ -31,6 +36,11 @@ namespace SAE.GAD176.P1.EnemyAI
         public void DestroySelf()
         {
 
+        }
+
+        protected void DisableStates()
+        {
+            isIdleStateEnabled = false;
         }
     }
 }

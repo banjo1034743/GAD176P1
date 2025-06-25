@@ -117,6 +117,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5941494516139574917}
+  - component: {fileID: 9115038522147109054}
   - component: {fileID: 502059198281291301}
   - component: {fileID: 3992996652827125333}
   m_Layer: 0
@@ -142,6 +143,22 @@ Transform:
   - {fileID: 4118744827547716439}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!114 &9115038522147109054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 111fac4ea7bb6a74a9c044884ad641eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  idleState: {fileID: 502059198281291301}
+  playerSightedChecker: {fileID: 0}
+  fleeState: {fileID: 0}
+  healthManager: {fileID: 0}
 --- !u!114 &502059198281291301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,6 +172,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementSpeed: 100
+  turnSpeed: 50
   enemyRB: {fileID: 3992996652827125333}
 --- !u!54 &3992996652827125333
 Rigidbody:
