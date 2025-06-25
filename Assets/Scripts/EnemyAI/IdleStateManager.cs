@@ -27,11 +27,18 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return null;
             }
 
-            enemyRB.velocity = Vector3.zero;
+            enemyRB.velocity = Vector3.zero; // Set velocity to 0 to fully stop motion
 
             pointToTravelTo = transform.position - new Vector3(0, 0, 5);
 
-            transform.rotation = Quaternion.LookRotation(pointToTravelTo);
+            // Continue work on this
+            //while (Quaternion.Euler(transform.rotation.x, transform.rotation.y, transform.rotation.z) < )
+            //{
+                //transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(pointToTravelTo), 1 * Time.deltaTime);
+                //yield return null;
+            //}
+
+            enemyRB.velocity = Vector3.zero; // Set velocity to 0 to fully stop motion
 
             while (transform.position.z < pointToTravelTo.z)
             {
@@ -50,14 +57,12 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private void Start()
         {
-            //StartCoroutine(BeginWalkCycle());    
+            StartCoroutine(BeginWalkCycle());    
         }
 
         private void Update()
         {
-            Vector3 pointToTravelTo = transform.position - new Vector3(0, 0, 5);
-
-            transform.rotation = Quaternion.LookRotation(pointToTravelTo);
+            
         }
         #endregion
     }
