@@ -119,9 +119,10 @@ GameObject:
   - component: {fileID: 5941494516139574917}
   - component: {fileID: 9115038522147109054}
   - component: {fileID: 502059198281291301}
+  - component: {fileID: 2615316958505654335}
   - component: {fileID: 3992996652827125333}
   m_Layer: 0
-  m_Name: EnemyAI
+  m_Name: EnemyAI (Melee)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -156,7 +157,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   idleState: {fileID: 502059198281291301}
-  playerSightedChecker: {fileID: 0}
+  playerSightedChecker: {fileID: 2615316958505654335}
   fleeState: {fileID: 0}
   healthManager: {fileID: 0}
 --- !u!114 &502059198281291301
@@ -174,6 +175,22 @@ MonoBehaviour:
   movementSpeed: 100
   turnSpeed: 50
   enemyRB: {fileID: 3992996652827125333}
+--- !u!114 &2615316958505654335
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7818759860b92114dbee3c0ad6ebfa55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lineOfViewDistance: 20
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
 --- !u!54 &3992996652827125333
 Rigidbody:
   m_ObjectHideFlags: 0

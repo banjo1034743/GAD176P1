@@ -25,10 +25,13 @@ namespace SAE.GAD176.P1.EnemyAI
             StartCoroutine(idleState.BeginWalkCycle(isIdleStateEnabled));
         }
 
-        public bool PlayerInSightCheck()
+        public void CallPlayerInSightCheck()
         {
-
-            return isIdleStateEnabled;
+            if (playerSightedChecker.PlayerInSightCheck())
+            {
+                Debug.Log("Raycast is true!");
+                DisableStates();
+            }
         }
 
         public abstract void AttackState();

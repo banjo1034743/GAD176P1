@@ -6,6 +6,6 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public interface IPlayerCheckerFunctionality
     {
-        public bool PlayerInSightCheck();
+        public void CallPlayerInSightCheck();
     }
 }
