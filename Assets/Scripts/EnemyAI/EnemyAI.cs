@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality
+    public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
         [SerializeField] protected IdleStateManager idleState;
         [SerializeField] protected PlayerSightedChecker playerSightedChecker;
@@ -19,6 +19,11 @@ namespace SAE.GAD176.P1.EnemyAI
             isIdleStateEnabled = true;
 
             StartCoroutine(idleState.BeginWalkCycle(isIdleStateEnabled));
+        }
+
+        public bool PlayerInSightCheck()
+        {
+            return isIdleStateEnabled;
         }
 
         public abstract void AttackState();
