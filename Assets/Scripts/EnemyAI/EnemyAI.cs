@@ -6,10 +6,14 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
+        [Header("Scripts")]
+
         [SerializeField] protected IdleStateManager idleState;
         [SerializeField] protected PlayerSightedChecker playerSightedChecker;
         [SerializeField] protected FleeStateManager fleeState;
         [SerializeField] protected HealthManager healthManager;
+
+        [Header("Data")]
 
         protected bool isIdleStateEnabled = false;
         
@@ -23,6 +27,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public bool PlayerInSightCheck()
         {
+
             return isIdleStateEnabled;
         }
 

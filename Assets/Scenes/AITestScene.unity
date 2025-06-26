@@ -1297,11 +1297,38 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9115038522147109054, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      propertyPath: playerSightedChecker
+      value: 
+      objectReference: {fileID: 4328944905895142433}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3438584476614280132, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      insertIndex: 3
+      addedObject: {fileID: 4328944905895142433}
   m_SourcePrefab: {fileID: 100100000, guid: 0a35dbc4857f1fa469195a9d91c7d618, type: 3}
+--- !u!1 &4328944905895142432 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3438584476614280132, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+    type: 3}
+  m_PrefabInstance: {fileID: 4328944905895142431}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4328944905895142433
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4328944905895142432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7818759860b92114dbee3c0ad6ebfa55, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5393215579111688471
 PrefabInstance:
   m_ObjectHideFlags: 0
