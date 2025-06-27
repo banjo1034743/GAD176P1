@@ -6,8 +6,16 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public class MeleeEnemyAI : EnemyAI, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
+        [Header("Scripts")]
+
+        [SerializeField] private PlayerApproacher playerApproacher; 
+
         public override void AttackState()
         {
+            // Call Player Approaching script here
+            playerApproacher.MoveTowardPlayer();
+
+            // When condition reached, stop moving toward player and begin attacking
             
         }
 
@@ -21,6 +29,14 @@ namespace SAE.GAD176.P1.EnemyAI
         private void FixedUpdate()
         {
             CallPlayerInSightCheck();
+        }
+
+        private void Update()
+        {
+            if (isAttackStateEnabled)
+            {
+                AttackState();
+            }
         }
 
         #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
+    public class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
         [Header("Scripts")]
 
@@ -16,6 +16,7 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Data")]
 
         protected bool isIdleStateEnabled = false;
+        protected bool isAttackStateEnabled = false;
         
         public void IdleState()
         {
@@ -37,10 +38,14 @@ namespace SAE.GAD176.P1.EnemyAI
             {
                 Debug.Log("Raycast is true!");
                 DisableStates();
+                isAttackStateEnabled = true;
             }
         }
 
-        public abstract void AttackState();
+        public virtual void AttackState()
+        {
+
+        }
 
         public void FleeState()
         {
@@ -60,6 +65,7 @@ namespace SAE.GAD176.P1.EnemyAI
         protected void DisableStates()
         {
             isIdleStateEnabled = false;
+            isAttackStateEnabled = false;
         }
     }
 }

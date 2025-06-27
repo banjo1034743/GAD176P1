@@ -120,6 +120,8 @@ GameObject:
   - component: {fileID: 9115038522147109054}
   - component: {fileID: 502059198281291301}
   - component: {fileID: 2615316958505654335}
+  - component: {fileID: 7060598104670205753}
+  - component: {fileID: 362599461454696860}
   - component: {fileID: 3992996652827125333}
   m_Layer: 0
   m_Name: EnemyAI (Melee)
@@ -188,10 +190,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7818759860b92114dbee3c0ad6ebfa55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineOfViewDistance: 100
+  lineOfViewDistance: 50
   layerMask:
     serializedVersion: 2
     m_Bits: 64
+  playerApproacher: {fileID: 7060598104670205753}
+--- !u!114 &7060598104670205753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: df056221370483549919189055538203, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  movementSpeed: 0
+  distanceToAttackFrom: 0
+  playerTransform: {fileID: 0}
+--- !u!114 &362599461454696860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29cdf4e12ea546243b20455ce40c8897, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackDamage: 0
+  distanceToAttackFrom: 0
+  attackCooldown: 0
 --- !u!54 &3992996652827125333
 Rigidbody:
   m_ObjectHideFlags: 0

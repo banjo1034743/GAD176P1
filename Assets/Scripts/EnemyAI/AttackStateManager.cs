@@ -4,18 +4,14 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public class AttackStateManager : MonoBehaviour
+    public abstract class AttackStateManager : MonoBehaviour
     {
-        // Start is called before the first frame update
-        void Start()
-        {
+        [SerializeField] private float attackDamage;
 
-        }
+        [SerializeField] private float distanceToAttackFrom;
 
-        // Update is called once per frame
-        void Update()
-        {
+        [SerializeField] private float attackCooldown;
 
-        }
+        public abstract void Attack();
     }
 }
