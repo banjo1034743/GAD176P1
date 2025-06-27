@@ -18,7 +18,7 @@ namespace SAE.GAD176.P1.EnemyAI
             IdleState();
         }
 
-        private void Update()
+        private void FixedUpdate()
         {
             CallPlayerInSightCheck();
         }

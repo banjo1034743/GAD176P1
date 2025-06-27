@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.UIElements;
 using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
@@ -16,7 +17,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public bool PlayerInSightCheck()
         {
-            Debug.DrawRay(transform.position, transform.forward);
+            Debug.DrawRay(transform.position, transform.forward * lineOfViewDistance);
 
             return Physics.Raycast(transform.position, transform.forward, lineOfViewDistance, layerMask);
         }

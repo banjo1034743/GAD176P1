@@ -175,6 +175,7 @@ MonoBehaviour:
   movementSpeed: 100
   turnSpeed: 50
   enemyRB: {fileID: 3992996652827125333}
+  enemyAI: {fileID: 9115038522147109054}
 --- !u!114 &2615316958505654335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -187,10 +188,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7818759860b92114dbee3c0ad6ebfa55, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lineOfViewDistance: 20
+  lineOfViewDistance: 100
   layerMask:
     serializedVersion: 2
-    m_Bits: 4294967295
+    m_Bits: 64
 --- !u!54 &3992996652827125333
 Rigidbody:
   m_ObjectHideFlags: 0

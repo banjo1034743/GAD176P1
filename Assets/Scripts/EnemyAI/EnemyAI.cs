@@ -22,7 +22,13 @@ namespace SAE.GAD176.P1.EnemyAI
             DisableStates();
             isIdleStateEnabled = true;
 
-            StartCoroutine(idleState.BeginWalkCycle(isIdleStateEnabled));
+            idleState.CallWalkCycleCoroutine();
+        }
+
+        // Called by IdleStateManager to check the value to know when to end the walk cycle loop
+        public bool GetIdleStateBool()
+        {
+            return isIdleStateEnabled;
         }
 
         public void CallPlayerInSightCheck()

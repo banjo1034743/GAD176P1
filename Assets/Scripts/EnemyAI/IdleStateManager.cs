@@ -14,63 +14,79 @@ namespace SAE.GAD176.P1.EnemyAI
         [Tooltip("This number determines how fast the AI turns around")]
         [SerializeField] private float turnSpeed;
 
+        // We use this variable to save the current running walk cycle coroutine to then stop whenever regardless of where code is running in it
+        private Coroutine currentWalkCycle = null;
+
         [Header("Components")]
 
         [SerializeField] private Rigidbody enemyRB; // We use this for moving the AI and accounting for collisions as well
 
-        public IEnumerator BeginWalkCycle(bool stateCheck)
+        [Header("Scripts")]
+
+        [SerializeField] private EnemyAI enemyAI;
+
+        public void CallWalkCycleCoroutine()
         {
-            while (stateCheck)
+            currentWalkCycle = StartCoroutine(StartWalkCycle());
+        }
+
+        private IEnumerator StartWalkCycle()
+        {
+            //Debug.Log("We're moving at the rate of: " + enemyRB.velocity);
+
+            Vector3 pointToTravelTo = transform.position + new Vector3(0, 0, 5);
+
+            while (transform.position.z < pointToTravelTo.z)
             {
-                //Debug.Log("We're moving at the rate of: " + enemyRB.velocity);
+                enemyRB.velocity = Vector3.forward * Time.fixedDeltaTime * movementSpeed;
+                yield return null;
+            }
 
-                Vector3 pointToTravelTo = transform.position + new Vector3(0, 0, 5);
+            enemyRB.velocity = Vector3.zero; // Set velocity to 0 to fully stop motion
 
-                while (transform.position.z < pointToTravelTo.z)
-                {
-                    enemyRB.velocity = Vector3.forward * Time.fixedDeltaTime * movementSpeed;
-                    yield return null;
-                }
+            pointToTravelTo = transform.position - new Vector3(0, 0, 5);
 
-                enemyRB.velocity = Vector3.zero; // Set velocity to 0 to fully stop motion
+            while (transform.rotation.eulerAngles.y < 180)
+            {
+                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+                yield return null;
+            }
 
-                pointToTravelTo = transform.position - new Vector3(0, 0, 5);
+            //Debug.Log("broke out of while loop");
 
-                while (transform.rotation.eulerAngles.y < 180)
-                {
-                    transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
-                    yield return null;
-                }
+            while (transform.position.z > pointToTravelTo.z)
+            {
+                enemyRB.velocity = -Vector3.forward * Time.fixedDeltaTime * movementSpeed;
+                yield return null;
+            }
 
-                //Debug.Log("broke out of while loop");
+            enemyRB.velocity = Vector3.zero;
 
-                while (transform.position.z > pointToTravelTo.z)
-                {
-                    enemyRB.velocity = -Vector3.forward * Time.fixedDeltaTime * movementSpeed;
-                    yield return null;
-                }
+            //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
 
-                enemyRB.velocity = Vector3.zero;
-
+            while (transform.rotation.eulerAngles.y > 1)
+            {
+                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
                 //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
-
-                while (transform.rotation.eulerAngles.y > 1)
-                {
-                    transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
-                    //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
-                    yield return null;
-                }
-
                 yield return null;
             }
         }
 
         #region Default Unity Methods
 
-        // This was used to test the functionality of the idle loop
         private void Start()
         {
-            //StartCoroutine(BeginWalkCycle());    
+            
+        }
+
+        private void Update()
+        {
+            // Will run in background to ensure the whole movement is stopped no matter where in walk cycle AI is
+            if (!enemyAI.GetIdleStateBool() && currentWalkCycle != null)
+            {
+                Debug.Log("Coroutine called to stop!");
+                StopCoroutine(currentWalkCycle);
+            }
         }
 
         #endregion
