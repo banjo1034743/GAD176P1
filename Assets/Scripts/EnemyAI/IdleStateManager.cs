@@ -6,6 +6,7 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public class IdleStateManager : MonoBehaviour
     {
+        #region Variables
         [Header("Data")]
 
         [Tooltip("This determines how fast the AI moves in the world")]
@@ -25,6 +26,10 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private EnemyAI enemyAI;
 
+        [SerializeField] private OnGroundChecker onGroundChecker;
+        #endregion
+
+        #region Methods
         public void CallWalkCycleCoroutine()
         {
             currentWalkCycle = StartCoroutine(StartWalkCycle());
@@ -38,11 +43,15 @@ namespace SAE.GAD176.P1.EnemyAI
 
             while (transform.position.z < pointToTravelTo.z)
             {
-                enemyRB.velocity = Vector3.forward * Time.fixedDeltaTime * movementSpeed;
+                transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
+
+                if (!onGroundChecker.GetOnGroundValue())
+                {
+                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                }
+
                 yield return null;
             }
-
-            enemyRB.velocity = Vector3.zero; // Set velocity to 0 to fully stop motion
 
             pointToTravelTo = transform.position - new Vector3(0, 0, 5);
 
@@ -56,11 +65,15 @@ namespace SAE.GAD176.P1.EnemyAI
 
             while (transform.position.z > pointToTravelTo.z)
             {
-                enemyRB.velocity = -Vector3.forward * Time.fixedDeltaTime * movementSpeed;
+                transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
+
+                if (!onGroundChecker.GetOnGroundValue())
+                {
+                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                }
+
                 yield return null;
             }
-
-            enemyRB.velocity = Vector3.zero;
 
             //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
 
@@ -71,24 +84,18 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return null;
             }
         }
+        #endregion
 
         #region Default Unity Methods
-
-        private void Start()
-        {
-            
-        }
-
         private void Update()
         {
             // Will run in background to ensure the whole movement is stopped no matter where in walk cycle AI is
             if (!enemyAI.GetIdleStateBool() && currentWalkCycle != null)
             {
-                Debug.Log("Coroutine called to stop!");
+                //Debug.Log("Coroutine called to stop!");
                 StopCoroutine(currentWalkCycle);
             }
         }
-
         #endregion
     }
 }

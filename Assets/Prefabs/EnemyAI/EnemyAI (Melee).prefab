@@ -121,8 +121,9 @@ GameObject:
   - component: {fileID: 502059198281291301}
   - component: {fileID: 2615316958505654335}
   - component: {fileID: 7060598104670205753}
+  - component: {fileID: 3600661045683594241}
   - component: {fileID: 362599461454696860}
-  - component: {fileID: 3992996652827125333}
+  - component: {fileID: 5924823514030375831}
   m_Layer: 0
   m_Name: EnemyAI (Melee)
   m_TagString: Untagged
@@ -162,6 +163,8 @@ MonoBehaviour:
   playerSightedChecker: {fileID: 2615316958505654335}
   fleeState: {fileID: 0}
   healthManager: {fileID: 0}
+  isAttackStateEnabled: 0
+  playerApproacher: {fileID: 7060598104670205753}
 --- !u!114 &502059198281291301
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,10 +177,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7c31022c2e6c2f4fa2cf9a5977854d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 100
+  movementSpeed: 1
   turnSpeed: 50
-  enemyRB: {fileID: 3992996652827125333}
+  enemyRB: {fileID: 5924823514030375831}
   enemyAI: {fileID: 9115038522147109054}
+  onGroundChecker: {fileID: 3600661045683594241}
 --- !u!114 &2615316958505654335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -207,9 +211,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df056221370483549919189055538203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 0
-  distanceToAttackFrom: 0
-  playerTransform: {fileID: 0}
+  movementSpeed: 2.5
+  turnSpeed: 100
+  distanceToAttackFrom: 1.5
+  onGroundChecker: {fileID: 3600661045683594241}
+--- !u!114 &3600661045683594241
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddd09d76409d97b43a8ce03706e5dc40, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &362599461454696860
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -225,7 +242,7 @@ MonoBehaviour:
   attackDamage: 0
   distanceToAttackFrom: 0
   attackCooldown: 0
---- !u!54 &3992996652827125333
+--- !u!54 &5924823514030375831
 Rigidbody:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -247,10 +264,10 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 112
+  m_Constraints: 0
   m_CollisionDetection: 0
 --- !u!1 &8466109881438191257
 GameObject:

@@ -6,18 +6,29 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public class MeleeEnemyAI : EnemyAI, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
+        #region Variables
+
         [Header("Scripts")]
 
-        [SerializeField] private PlayerApproacher playerApproacher; 
+        [SerializeField] private PlayerApproacher playerApproacher;
 
+        #endregion
+
+        #region Methods
         public override void AttackState()
         {
-            // Call Player Approaching script here
-            playerApproacher.MoveTowardPlayer();
+            if (!playerApproacher.DistanceFromPlayerCheck())
+            {
+                playerApproacher.MoveTowardPlayer();
+            }
+            else
+            {
+                // When condition reached, stop moving toward player and begin attacking
+                Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
+            }
 
-            // When condition reached, stop moving toward player and begin attacking
-            
         }
+        #endregion
 
         #region Unity Functions
 

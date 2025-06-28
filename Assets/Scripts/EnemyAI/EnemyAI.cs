@@ -16,7 +16,7 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Data")]
 
         protected bool isIdleStateEnabled = false;
-        protected bool isAttackStateEnabled = false;
+        [SerializeField] protected bool isAttackStateEnabled = false;
         
         public void IdleState()
         {
@@ -36,7 +36,7 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             if (playerSightedChecker.PlayerInSightCheck())
             {
-                Debug.Log("Raycast is true!");
+                //Debug.Log("Raycast is true!");
                 DisableStates();
                 isAttackStateEnabled = true;
             }
