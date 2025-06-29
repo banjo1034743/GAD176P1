@@ -12,6 +12,8 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private PlayerApproacher playerApproacher;
 
+        [SerializeField] private AttackStateMeleeManager attackStateMeleeManager;
+
         #endregion
 
         #region Methods
@@ -23,8 +25,8 @@ namespace SAE.GAD176.P1.EnemyAI
             }
             else
             {
-                // When condition reached, stop moving toward player and begin attacking
-                Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
+                //Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
+                attackStateMeleeManager.Attack();
             }
 
         }

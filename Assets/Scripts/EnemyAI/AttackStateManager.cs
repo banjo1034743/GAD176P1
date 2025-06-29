@@ -6,11 +6,14 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public abstract class AttackStateManager : MonoBehaviour
     {
-        [SerializeField] private float attackDamage;
+        [Header("Data")]
 
-        [SerializeField] private float distanceToAttackFrom;
+        [Tooltip("The ammount of damage dealt to the player")]
+        [SerializeField] protected float attackDamage;
 
-        [SerializeField] private float attackCooldown;
+        [SerializeField] protected float distanceToAttackFrom;
+
+        [SerializeField] protected float attackCooldown;
 
         public abstract void Attack();
     }

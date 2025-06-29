@@ -13,9 +13,6 @@ namespace SAE.GAD176.P1.EnemyAI
         [Tooltip("The rate of speed the AI will move toward the player at")]
         [SerializeField] private float movementSpeed;
 
-        [Tooltip("The rate of speed the AI will turn at when moving toward player")]
-        [SerializeField] private float turnSpeed;
-
         [Tooltip("How close the AI needs to be to the player before attack them witn a close-ranged attack")]
         [SerializeField] private float distanceToAttackFrom;
 
@@ -70,6 +67,11 @@ namespace SAE.GAD176.P1.EnemyAI
             playerTransform = player;
         }
 
+        public Transform GetPlayerTransform()
+        {
+            return playerTransform;
+        }
+
         private void SetIsInAttackDistanceValue(bool value)
         {
             isInAttackDistance = value;
@@ -80,9 +82,12 @@ namespace SAE.GAD176.P1.EnemyAI
         /// </summary>
         private void RotateTowardsPlayer()
         {
-            Debug.Log("I'm rotating toward the player");
-            Vector3 newRotation = Vector3.RotateTowards(transform.forward, playerTransform.position, turnSpeed * Time.deltaTime, 0);
-            transform.rotation = Quaternion.LookRotation(newRotation);
+            //Debug.Log("I'm rotating toward the player");
+
+            if (!onGroundChecker.GetOnGroundValue())
+            {
+                transform.rotation = Quaternion.LookRotation((playerTransform.position - transform.position), Vector3.up);
+            }
         }
 
         #endregion
