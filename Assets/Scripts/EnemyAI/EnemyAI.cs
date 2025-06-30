@@ -42,6 +42,9 @@ namespace SAE.GAD176.P1.EnemyAI
             }
         }
 
+        /// <summary>
+        /// This is overriden, with content added to it, in the children of this class
+        /// </summary>
         public virtual void AttackState()
         {
 
@@ -52,7 +55,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         }
 
-        public void CallSetHealth()
+        public void StartRegeneratingHealth()
         {
 
         }

@@ -33,7 +33,7 @@ namespace SAE.GAD176.P1.EnemyAI
         #region Methods
         public void MoveTowardPlayer()
         {
-            //Debug.Log("Called MoveTowardPlayer");
+            Debug.Log("Called MoveTowardPlayer");
 
             if (Vector3.Distance(transform.position, playerTransform.position) > distanceToAttackFrom)
             {
@@ -72,8 +72,9 @@ namespace SAE.GAD176.P1.EnemyAI
             return playerTransform;
         }
 
-        private void SetIsInAttackDistanceValue(bool value)
+        public void SetIsInAttackDistanceValue(bool value)
         {
+            //Debug.Log("SetIsInAttackDistanceValue method has been called");
             isInAttackDistance = value;
         }
 
@@ -82,10 +83,12 @@ namespace SAE.GAD176.P1.EnemyAI
         /// </summary>
         private void RotateTowardsPlayer()
         {
-            //Debug.Log("I'm rotating toward the player");
+            Debug.Log("I'm rotating toward the player");
 
             if (!onGroundChecker.GetOnGroundValue())
             {
+                Debug.Log("We've touched the ground");
+
                 transform.rotation = Quaternion.LookRotation((playerTransform.position - transform.position), Vector3.up);
             }
         }

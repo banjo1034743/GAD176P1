@@ -16,5 +16,11 @@ namespace SAE.GAD176.P1.EnemyAI
         [SerializeField] protected float attackCooldown;
 
         public abstract void Attack();
+
+        protected void EndAttackCoroutine(Coroutine coroutineToEnd)
+        {
+            StopCoroutine(coroutineToEnd);
+            coroutineToEnd = null;
+        }
     }
 }

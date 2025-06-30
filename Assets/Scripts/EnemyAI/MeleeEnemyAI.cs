@@ -25,7 +25,7 @@ namespace SAE.GAD176.P1.EnemyAI
             }
             else
             {
-                //Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
+                Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
                 attackStateMeleeManager.Attack();
             }
 
@@ -50,6 +50,7 @@ namespace SAE.GAD176.P1.EnemyAI
             {
                 AttackState();
             }
+
         }
 
         #endregion

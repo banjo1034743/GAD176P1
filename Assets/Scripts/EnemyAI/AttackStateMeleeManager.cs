@@ -21,13 +21,18 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private DistanceFromPlayerChecker distanceFromPlayerChecker;
 
+        [SerializeField] private PlayerApproacher playerApproacher;
+
         #endregion
 
         #region Methods
         public override void Attack()
         {
+            Debug.Log("Attack() in AttackStateMeleeManager has been called");
+
             if (attackCoroutine == null)
             {
+                Debug.Log("attackCoroutine wa null");
                 attackCoroutine = StartCoroutine(AttackCoroutine());
             }
         }
@@ -51,7 +56,9 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return new WaitForSeconds(attackCooldown);
             }
 
-            Debug.Log("No longer in attack state");
+            //Debug.Log("No longer in attack state");
+            playerApproacher.SetIsInAttackDistanceValue(false);
+            EndAttackCoroutine(attackCoroutine);
         }
 
         #endregion

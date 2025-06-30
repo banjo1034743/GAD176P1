@@ -6,6 +6,6 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public interface IHealthFunctionality
     {
-        public void CallSetHealth();
+        public void StartRegeneratingHealth();
     }
 }
