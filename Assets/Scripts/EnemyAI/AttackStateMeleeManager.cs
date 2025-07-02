@@ -11,17 +11,13 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private Coroutine attackCoroutine;
 
-        [Header("Components (Melee)")]
-
-        [SerializeField] private AnimationClip meleeAttackClip;
-
-        [SerializeField] private Animator animationController;
-
         [Header("Scripts (Melee)")]
 
         [SerializeField] private DistanceFromPlayerChecker distanceFromPlayerChecker;
 
         [SerializeField] private PlayerApproacher playerApproacher;
+
+        [SerializeField] private EnemyMeleeAnimationManager enemyMeleeAnimationManager;
 
         #endregion
 
@@ -41,23 +37,25 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             Debug.Log("Attack called in AttackStateMeleeManager");
 
+            enemyMeleeAnimationManager.StartAnimation();
+
             while (distanceFromPlayerChecker.CheckDistanceFromPlayer() < distanceToAttackFrom)
             {
-                if (!animationController.GetBool(0))
+                if (!enemyMeleeAnimationManager.GetCanPlayAttackAnimationValue())
                 {
-                    // By doing getparameter with an index, we ensure that we dont need to dive back into script to change string value for parameter if changing its name
-                    animationController.SetBool(animationController.GetParameter(0).name, true);
+                    enemyMeleeAnimationManager.SetCanPlayAttackAnimationBool(true);
                 }
 
-                yield return new WaitForSeconds(meleeAttackClip.length);
+                yield return new WaitForSeconds(enemyMeleeAnimationManager.GetAttackAnimationLength());
 
-                animationController.SetBool(animationController.GetParameter(0).name, false);
+                enemyMeleeAnimationManager.SetCanPlayAttackAnimationBool(false);
 
                 yield return new WaitForSeconds(attackCooldown);
             }
 
             //Debug.Log("No longer in attack state");
             playerApproacher.SetIsInAttackDistanceValue(false);
+            enemyMeleeAnimationManager.StopAnimation();
             EndAttackCoroutine(attackCoroutine);
         }
 
@@ -66,7 +64,8 @@ namespace SAE.GAD176.P1.EnemyAI
         #region Unity Methods
         private void Start()
         {
-            animationController.SetBool(animationController.GetParameter(0).name, false);
+            //enemyMeleeAnimationManager.SetCanPlayAttackAnimationBool(false);
+            //enemyMeleeAnimationManager.StopAnimation();
         }
 
         #endregion

@@ -1151,6 +1151,32 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
+--- !u!1 &2085058586 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3438584476614280132, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+    type: 3}
+  m_PrefabInstance: {fileID: 6814727041588485247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &2085058587 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 397115977535451945, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+    type: 3}
+  m_PrefabInstance: {fileID: 6814727041588485247}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2085058598
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2085058586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca6adbecbf064d4babb3461a6304658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttackClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
+  animationController: {fileID: 2085058587}
 --- !u!1001 &60889539378096550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1712,6 +1738,21 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 362599461454696860, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      propertyPath: enemyMeleeAnimationManager
+      value: 
+      objectReference: {fileID: 2085058598}
+    - target: {fileID: 397115977535451945, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 502059198281291301, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      propertyPath: turnSpeed
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 3438584476614280132, guid: 0a35dbc4857f1fa469195a9d91c7d618,
         type: 3}
       propertyPath: m_Name
@@ -1770,7 +1811,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3438584476614280132, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      insertIndex: 7
+      addedObject: {fileID: 2085058598}
   m_SourcePrefab: {fileID: 100100000, guid: 0a35dbc4857f1fa469195a9d91c7d618, type: 3}
 --- !u!1001 &7288094137546172433
 PrefabInstance:

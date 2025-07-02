@@ -37,51 +37,56 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private IEnumerator StartWalkCycle()
         {
-            //Debug.Log("We're moving at the rate of: " + enemyRB.velocity);
-
-            Vector3 pointToTravelTo = transform.position + new Vector3(0, 0, 5);
-
-            while (transform.position.z < pointToTravelTo.z)
+            while (enemyAI.GetIdleStateBool())
             {
-                transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
+                //Debug.Log("We're moving at the rate of: " + enemyRB.velocity);
 
-                if (!onGroundChecker.GetOnGroundValue())
+                Vector3 pointToTravelTo = transform.position + new Vector3(0, 0, 5);
+
+                while (transform.position.z < pointToTravelTo.z)
                 {
-                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
+
+                    if (!onGroundChecker.GetOnGroundValue())
+                    {
+                        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    }
+
+                    yield return null;
                 }
 
-                yield return null;
-            }
+                pointToTravelTo = transform.position - new Vector3(0, 0, 5);
 
-            pointToTravelTo = transform.position - new Vector3(0, 0, 5);
-
-            while (transform.rotation.eulerAngles.y < 180)
-            {
-                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
-                yield return null;
-            }
-
-            //Debug.Log("broke out of while loop");
-
-            while (transform.position.z > pointToTravelTo.z)
-            {
-                transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
-
-                if (!onGroundChecker.GetOnGroundValue())
+                while (transform.rotation.eulerAngles.y < 180)
                 {
-                    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    Debug.Log("We are rotating");
+
+                    transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+                    yield return null;
                 }
 
-                yield return null;
-            }
+                //Debug.Log("broke out of while loop");
 
-            //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
+                while (transform.position.z > pointToTravelTo.z)
+                {
+                    transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
 
-            while (transform.rotation.eulerAngles.y > 1)
-            {
-                transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+                    if (!onGroundChecker.GetOnGroundValue())
+                    {
+                        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    }
+
+                    yield return null;
+                }
+
                 //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
-                yield return null;
+
+                while (transform.rotation.eulerAngles.y > 1)
+                {
+                    transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+                    //Debug.Log("Current Y rotation in euler: " + transform.rotation.eulerAngles.y);
+                    yield return null;
+                }
             }
         }
         #endregion

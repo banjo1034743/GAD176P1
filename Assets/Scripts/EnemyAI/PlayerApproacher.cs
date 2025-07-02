@@ -22,7 +22,7 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Components")]
 
         // The referecne to the player we move towards
-        private Transform playerTransform;
+        [SerializeField] private Transform playerTransform;
 
         [Header("Scripts")]
 
@@ -89,7 +89,7 @@ namespace SAE.GAD176.P1.EnemyAI
             {
                 Debug.Log("We've touched the ground");
 
-                transform.rotation = Quaternion.LookRotation((playerTransform.position - transform.position), Vector3.up);
+                transform.LookAt(playerTransform.position, Vector3.up);
             }
         }
 
