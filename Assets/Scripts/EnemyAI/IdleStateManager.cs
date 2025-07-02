@@ -47,10 +47,10 @@ namespace SAE.GAD176.P1.EnemyAI
                 {
                     transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
 
-                    if (!onGroundChecker.GetOnGroundValue())
-                    {
-                        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                    }
+                    //if (!onGroundChecker.GetOnGroundValue())
+                    //{
+                    //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    //}
 
                     yield return null;
                 }
@@ -71,10 +71,10 @@ namespace SAE.GAD176.P1.EnemyAI
                 {
                     transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
 
-                    if (!onGroundChecker.GetOnGroundValue())
-                    {
-                        transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                    }
+                    //if (!onGroundChecker.GetOnGroundValue())
+                    //{
+                    //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
+                    //}
 
                     yield return null;
                 }

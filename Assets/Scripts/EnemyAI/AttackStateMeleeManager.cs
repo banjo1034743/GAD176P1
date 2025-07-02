@@ -29,6 +29,8 @@ namespace SAE.GAD176.P1.EnemyAI
             if (attackCoroutine == null)
             {
                 Debug.Log("attackCoroutine wa null");
+
+                enemyMeleeAnimationManager.StartAnimation();
                 attackCoroutine = StartCoroutine(AttackCoroutine());
             }
         }
@@ -36,8 +38,6 @@ namespace SAE.GAD176.P1.EnemyAI
         private IEnumerator AttackCoroutine()
         {
             Debug.Log("Attack called in AttackStateMeleeManager");
-
-            enemyMeleeAnimationManager.StartAnimation();
 
             while (distanceFromPlayerChecker.CheckDistanceFromPlayer() < distanceToAttackFrom)
             {
@@ -59,13 +59,18 @@ namespace SAE.GAD176.P1.EnemyAI
             EndAttackCoroutine(attackCoroutine);
         }
 
+        public void ClearCoroutine()
+        {
+            attackCoroutine = null;
+        }
+
         #endregion
 
         #region Unity Methods
         private void Start()
         {
-            //enemyMeleeAnimationManager.SetCanPlayAttackAnimationBool(false);
-            //enemyMeleeAnimationManager.StopAnimation();
+            enemyMeleeAnimationManager.SetCanPlayAttackAnimationBool(false);
+            enemyMeleeAnimationManager.StopAnimation();
         }
 
         #endregion

@@ -10,8 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4118744827547716439}
   - component: {fileID: 7225393089379939163}
+  - component: {fileID: 4144841495884485454}
   - component: {fileID: 8037763974544954524}
   - component: {fileID: 5170025789739146115}
+  - component: {fileID: 5564612570411833878}
   m_Layer: 0
   m_Name: EnemyAIBody
   m_TagString: Untagged
@@ -33,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 800113630207231275}
+  - {fileID: 1627415235365518536}
   m_Father: {fileID: 5941494516139574917}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!136 &7225393089379939163
@@ -52,11 +55,32 @@ CapsuleCollider:
   m_LayerOverridePriority: 0
   m_IsTrigger: 0
   m_ProvidesContacts: 0
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2
+  m_Height: 2.02
   m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!65 &4144841495884485454
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786008045411866212}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 2, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!33 &8037763974544954524
 MeshFilter:
@@ -108,6 +132,27 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!95 &5564612570411833878
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1786008045411866212}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: ffc421dd262da93408a681ad24b0ae62, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &2453125783010631176
 GameObject:
   m_ObjectHideFlags: 0
@@ -136,11 +181,11 @@ Transform:
   m_GameObject: {fileID: 2453125783010631176}
   serializedVersion: 2
   m_LocalRotation: {x: -0.26873186, y: 0.25090694, z: 0.072727546, w: 0.9271136}
-  m_LocalPosition: {x: 0.524, y: 0.959, z: 0.799}
-  m_LocalScale: {x: 0.36654305, y: 0.598, z: 1}
+  m_LocalPosition: {x: 0.524, y: -0.032000005, z: 0.799}
+  m_LocalScale: {x: 0.36654302, y: 0.59800005, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 5941494516139574917}
+  m_Father: {fileID: 4118744827547716439}
   m_LocalEulerAnglesHint: {x: -32.329, y: 30.287, z: 0}
 --- !u!33 &5111972157830531679
 MeshFilter:
@@ -228,10 +273,10 @@ GameObject:
   - component: {fileID: 7060598104670205753}
   - component: {fileID: 3600661045683594241}
   - component: {fileID: 362599461454696860}
+  - component: {fileID: 1272607313224299385}
   - component: {fileID: 1030152790848371893}
   - component: {fileID: 8544139824372022991}
   - component: {fileID: 5924823514030375831}
-  - component: {fileID: 397115977535451945}
   m_Layer: 0
   m_Name: EnemyAI (Melee)
   m_TagString: Untagged
@@ -253,7 +298,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4118744827547716439}
-  - {fileID: 1627415235365518536}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!114 &9115038522147109054
@@ -323,6 +367,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 3
   distanceToAttackFrom: 1.5
+  playerTransform: {fileID: 0}
   onGroundChecker: {fileID: 3600661045683594241}
 --- !u!114 &3600661045683594241
 MonoBehaviour:
@@ -351,10 +396,23 @@ MonoBehaviour:
   attackDamage: 5
   distanceToAttackFrom: 2.5
   attackCooldown: 0.5
-  meleeAttackClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
-  animationController: {fileID: 397115977535451945}
   distanceFromPlayerChecker: {fileID: 1030152790848371893}
   playerApproacher: {fileID: 7060598104670205753}
+  enemyMeleeAnimationManager: {fileID: 1272607313224299385}
+--- !u!114 &1272607313224299385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ca6adbecbf064d4babb3461a6304658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeAttackClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
+  animationController: {fileID: 5564612570411833878}
 --- !u!114 &1030152790848371893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -405,32 +463,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 16
   m_CollisionDetection: 0
---- !u!95 &397115977535451945
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3438584476614280132}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ffc421dd262da93408a681ad24b0ae62, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &8466109881438191257
 GameObject:
   m_ObjectHideFlags: 0

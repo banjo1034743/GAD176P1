@@ -14,7 +14,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private void Start()
         {
-            //canPlayAttackAnim = Animator.StringToHash("canPlayAttackAnimation");
+            canPlayAttackAnim = Animator.StringToHash("canPlayAttackAnimation");
         }
 
         public void SetCanPlayAttackAnimationBool(bool value)
@@ -34,12 +34,12 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public void StopAnimation()
         {
-            animationController.StopPlayback();
+            animationController.enabled = false;
         }
 
         public void StartAnimation()
         {
-            animationController.StartPlayback();
+            animationController.enabled = true;
         }
     }
 }

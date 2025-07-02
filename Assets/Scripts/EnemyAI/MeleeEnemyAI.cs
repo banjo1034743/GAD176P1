@@ -21,6 +21,7 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             if (!playerApproacher.DistanceFromPlayerCheck())
             {
+                attackStateMeleeManager.ClearCoroutine();
                 playerApproacher.MoveTowardPlayer();
             }
             else
