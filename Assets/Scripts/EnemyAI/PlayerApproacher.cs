@@ -38,13 +38,13 @@ namespace SAE.GAD176.P1.EnemyAI
             if (Vector3.Distance(transform.position, playerTransform.position) > distanceToAttackFrom)
             {
                 transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, movementSpeed * Time.deltaTime);
+                RotateTowardsPlayer();
 
                 if (!onGroundChecker.GetOnGroundValue())
                 {
                     transform.position = new Vector3(transform.position.x, 0, transform.position.z);
                 }
 
-                RotateTowardsPlayer();
                 SetIsInAttackDistanceValue(false);
             }
             else
@@ -85,12 +85,14 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             Debug.Log("I'm rotating toward the player");
 
-            if (!onGroundChecker.GetOnGroundValue())
-            {
-                Debug.Log("We've touched the ground");
+            transform.LookAt(playerTransform.position, Vector3.up);
 
-                transform.LookAt(playerTransform.position, Vector3.up);
-            }
+            //if (!onGroundChecker.GetOnGroundValue())
+            //{
+            //    Debug.Log("We've touched the ground");
+
+            //    transform.LookAt(playerTransform.position, Vector3.up);
+            //}
         }
 
         #endregion

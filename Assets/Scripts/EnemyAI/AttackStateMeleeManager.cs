@@ -54,8 +54,8 @@ namespace SAE.GAD176.P1.EnemyAI
             }
 
             //Debug.Log("No longer in attack state");
-            playerApproacher.SetIsInAttackDistanceValue(false);
             enemyMeleeAnimationManager.StopAnimation();
+            playerApproacher.SetIsInAttackDistanceValue(false);
             EndAttackCoroutine(attackCoroutine);
         }
 

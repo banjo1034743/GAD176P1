@@ -438,7 +438,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edfc81d211194b947ac4f9c80d536750, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeEnemyAI: {fileID: 9115038522147109054}
+  fleeingMovementSpeed: 4
+  enemyAIMovePoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  enemyAI: {fileID: 9115038522147109054}
 --- !u!114 &8544139824372022991
 MonoBehaviour:
   m_ObjectHideFlags: 0
