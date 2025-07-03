@@ -275,6 +275,7 @@ GameObject:
   - component: {fileID: 362599461454696860}
   - component: {fileID: 1272607313224299385}
   - component: {fileID: 1030152790848371893}
+  - component: {fileID: 2443917519009061744}
   - component: {fileID: 8544139824372022991}
   - component: {fileID: 5924823514030375831}
   m_Layer: 0
@@ -314,9 +315,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   idleState: {fileID: 502059198281291301}
   playerSightedChecker: {fileID: 2615316958505654335}
-  fleeState: {fileID: 0}
-  healthManager: {fileID: 0}
-  isAttackStateEnabled: 0
+  fleeState: {fileID: 2443917519009061744}
+  healthManager: {fileID: 8544139824372022991}
   playerApproacher: {fileID: 7060598104670205753}
   attackStateMeleeManager: {fileID: 362599461454696860}
 --- !u!114 &502059198281291301
@@ -426,6 +426,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerApproacher: {fileID: 7060598104670205753}
+--- !u!114 &2443917519009061744
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edfc81d211194b947ac4f9c80d536750, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meleeEnemyAI: {fileID: 9115038522147109054}
 --- !u!114 &8544139824372022991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -439,7 +452,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyAIHealth: 25
-  healthRemainingToEnableFleeState: 0
+  healthRemainingToEnableFleeState: 5
+  enemyAI: {fileID: 9115038522147109054}
   debugMode: 1
 --- !u!54 &5924823514030375831
 Rigidbody:

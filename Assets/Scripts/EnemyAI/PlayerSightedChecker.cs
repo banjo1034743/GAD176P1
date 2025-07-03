@@ -41,7 +41,11 @@ namespace SAE.GAD176.P1.EnemyAI
                     //Debug.Log(hit.transform);
 
                     playerTransform = hit.transform;
-                    playerApproacher.SetPlayerTransformReference(playerTransform);
+
+                    if (playerApproacher.GetPlayerTransform() == null)
+                    {
+                        playerApproacher.SetPlayerTransformReference(playerTransform);
+                    }
                 }
 
                 return true;

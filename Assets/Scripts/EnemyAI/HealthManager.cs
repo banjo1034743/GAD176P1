@@ -8,11 +8,17 @@ namespace SAE.GAD176.P1.EnemyAI
     {
         #region Variables
 
+        [Header("Data")]
+
         [SerializeField] private float enemyAIHealth;
 
         private float enemyAIMaxHealth;
 
         [SerializeField] private float healthRemainingToEnableFleeState;
+
+        [Header("Scripts")]
+
+        [SerializeField] private EnemyAI enemyAI;
 
         #endregion
 
@@ -29,6 +35,14 @@ namespace SAE.GAD176.P1.EnemyAI
             enemyAIHealth -= valueToChangeBy;
         }
 
+        private void CheckIfHealthRemainEnablesFleeState()
+        {
+            if (enemyAIHealth <= healthRemainingToEnableFleeState)
+            {
+                enemyAI.FleeState();
+            }
+        } 
+
         #endregion
 
         #region Unity Methods
@@ -41,6 +55,8 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private void Update()
         {
+            CheckIfHealthRemainEnablesFleeState();
+
             if (debugMode)
             {
                 LowerHealthToEnableFleeState();
@@ -59,6 +75,8 @@ namespace SAE.GAD176.P1.EnemyAI
                 {
                     enemyAIHealth = healthRemainingToEnableFleeState;
                     Debug.Log("Enemy AI health is " + enemyAIHealth);
+
+
                 }
             }
         }

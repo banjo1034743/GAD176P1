@@ -51,7 +51,10 @@ namespace SAE.GAD176.P1.EnemyAI
             {
                 AttackState();
             }
-
+            if (isFleeStateEnabled)
+            {
+                FleeState();
+            }
         }
 
         #endregion

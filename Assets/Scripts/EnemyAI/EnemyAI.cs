@@ -16,8 +16,9 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Data")]
 
         protected bool isIdleStateEnabled = false;
-        [SerializeField] protected bool isAttackStateEnabled = false;
-        
+        protected bool isAttackStateEnabled = false;
+        protected bool isFleeStateEnabled = false;
+
         public void IdleState()
         {
             DisableStates();
@@ -52,7 +53,16 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public void FleeState()
         {
+            DisableStates();
+            isFleeStateEnabled = true;
 
+            fleeState.CallFleeCycleCoroutine();
+            StartRegeneratingHealth();
+        }
+
+        public bool GetFleeStateBool()
+        {
+            return isFleeStateEnabled;
         }
 
         public void StartRegeneratingHealth()
@@ -65,10 +75,16 @@ namespace SAE.GAD176.P1.EnemyAI
 
         }
 
+        public void EnableFleeState()
+        {
+            isFleeStateEnabled = true;
+        }
+
         protected void DisableStates()
         {
             isIdleStateEnabled = false;
             isAttackStateEnabled = false;
+            isFleeStateEnabled = false;
         }
     }
 }
