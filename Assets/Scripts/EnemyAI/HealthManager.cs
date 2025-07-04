@@ -67,7 +67,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private void CheckIfHealthRemainEnablesFleeState()
         {
-            if (enemyAIHealth <= healthRemainingToEnableFleeState && !enemyAI.GetFleeStateBool())
+            if (enemyAIHealth <= healthRemainingToEnableFleeState && enemyAIHealth > 0 && !enemyAI.GetFleeStateBool())
             {
                 Debug.Log("Called FleeState from CheckIfHealthRemainEnablesFleestate in Health Manager");
                 enemyMeleeAnimationManager.StopAnimation();
@@ -97,6 +97,7 @@ namespace SAE.GAD176.P1.EnemyAI
             if (debugMode)
             {
                 LowerHealthToEnableFleeState();
+                LowerHealthToZero();
             }
         }
 
@@ -116,6 +117,14 @@ namespace SAE.GAD176.P1.EnemyAI
                     enemyAIHealth = healthRemainingToEnableFleeState;
                     Debug.Log("Enemy AI health is " + enemyAIHealth);
                 }
+            }
+        }
+
+        private void LowerHealthToZero()
+        {
+            if (Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                enemyAIHealth = 0;
             }
         }
 

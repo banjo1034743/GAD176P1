@@ -13,6 +13,7 @@ namespace SAE.GAD176.P1.EnemyAI
         [SerializeField] protected FleeStateManager fleeState;
         [SerializeField] protected HealthManager healthManager;
         [SerializeField] protected HealthRegenerator healthRegenerator;
+        [SerializeField] protected EnemyAIDestroyer enemyAIDestroyer;
 
         [Header("Data")]
 
@@ -71,9 +72,9 @@ namespace SAE.GAD176.P1.EnemyAI
             healthRegenerator.CallRegenerateHealthCoroutine();
         }
 
-        public void DestroySelf()
+        public void CallDestroySelf()
         {
-
+            enemyAIDestroyer.DestroySelf();
         }
 
         public void EnableFleeState()

@@ -7,6 +7,6 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public interface IKillableFunctionality
     {
-        public void DestroySelf();
+        public void CallDestroySelf();
     }
 }

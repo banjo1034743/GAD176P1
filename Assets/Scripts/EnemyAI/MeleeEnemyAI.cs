@@ -58,12 +58,12 @@ namespace SAE.GAD176.P1.EnemyAI
             {
                 AttackState();
             }
-            else if (!isAttackStateEnabled && healthManager.GetHealth() <= healthManager.GetHealthRemainingToEnableFleeState())
+            else if (!isAttackStateEnabled && healthManager.GetHealth() <= healthManager.GetHealthRemainingToEnableFleeState() && healthManager.GetHealth() > 0)
             {
                 StartRegeneratingHealth();
             }
 
-            if (healthManager.GetHealth() < healthManager.GetMaxHealth())
+            if (healthManager.GetHealth() < healthManager.GetMaxHealth() && healthManager.GetHealth() > 0)
             {
                 Debug.Log("Called FleeState from Update in MeleeEnemyAI");
                 FleeState();
@@ -71,6 +71,10 @@ namespace SAE.GAD176.P1.EnemyAI
             else if (healthManager.GetHealth() == healthManager.GetMaxHealth())
             {
                 isFleeStateEnabled = false;
+            }
+            else if (healthManager.GetHealth() == 0)
+            {
+                CallDestroySelf();
             }
         }
 
