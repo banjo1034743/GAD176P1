@@ -9,7 +9,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [Header("Data (Melee)")]
 
-        private Coroutine attackCoroutine;
+        private Coroutine attackCoroutine = null;
 
         [Header("Scripts (Melee)")]
 
@@ -24,11 +24,11 @@ namespace SAE.GAD176.P1.EnemyAI
         #region Methods
         public override void Attack()
         {
-            Debug.Log("Attack() in AttackStateMeleeManager has been called");
+            //Debug.Log("Attack() in AttackStateMeleeManager has been called");
 
             if (attackCoroutine == null)
             {
-                Debug.Log("attackCoroutine wa null");
+                //Debug.Log("attackCoroutine wa null");
 
                 enemyMeleeAnimationManager.StartAnimation();
                 attackCoroutine = StartCoroutine(AttackCoroutine());
@@ -37,7 +37,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private IEnumerator AttackCoroutine()
         {
-            Debug.Log("Attack called in AttackStateMeleeManager");
+            //Debug.Log("Attack called in AttackStateMeleeManager");
 
             while (distanceFromPlayerChecker.CheckDistanceFromPlayer() < distanceToAttackFrom)
             {

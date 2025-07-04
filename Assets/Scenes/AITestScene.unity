@@ -878,6 +878,18 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1527697236 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 765800043255450039, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+    type: 3}
+  m_PrefabInstance: {fileID: 6814727041588485247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9b739eeb3f11846a055dc6ffd4f7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1646144131 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5807610247619498897, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
@@ -1806,6 +1818,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8544139824372022991, guid: 0a35dbc4857f1fa469195a9d91c7d618,
+        type: 3}
+      propertyPath: healthRegenerator
+      value: 
+      objectReference: {fileID: 1527697236}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

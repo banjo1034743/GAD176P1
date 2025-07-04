@@ -12,12 +12,14 @@ namespace SAE.GAD176.P1.EnemyAI
         [SerializeField] protected PlayerSightedChecker playerSightedChecker;
         [SerializeField] protected FleeStateManager fleeState;
         [SerializeField] protected HealthManager healthManager;
+        [SerializeField] protected HealthRegenerator healthRegenerator;
 
         [Header("Data")]
 
-        protected bool isIdleStateEnabled = false;
-        protected bool isAttackStateEnabled = false;
-        protected bool isFleeStateEnabled = false;
+        // Remove serialization from these bools after resolving bug
+        [SerializeField] protected bool isIdleStateEnabled = false;
+        [SerializeField] protected bool isAttackStateEnabled = false;
+        [SerializeField] protected bool isFleeStateEnabled = false;
 
         public void IdleState()
         {
@@ -35,7 +37,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public void CallPlayerInSightCheck()
         {
-            if (playerSightedChecker.PlayerInSightCheck())
+            if (playerSightedChecker.PlayerInSightCheck() && !isFleeStateEnabled)
             {
                 //Debug.Log("Raycast is true!");
                 DisableStates();
@@ -57,7 +59,6 @@ namespace SAE.GAD176.P1.EnemyAI
             isFleeStateEnabled = true;
 
             fleeState.CallFleeCycleCoroutine();
-            StartRegeneratingHealth();
         }
 
         public bool GetFleeStateBool()
@@ -67,7 +68,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public void StartRegeneratingHealth()
         {
-
+            healthRegenerator.CallRegenerateHealthCoroutine();
         }
 
         public void DestroySelf()

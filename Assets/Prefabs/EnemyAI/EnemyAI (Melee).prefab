@@ -277,6 +277,7 @@ GameObject:
   - component: {fileID: 1030152790848371893}
   - component: {fileID: 2443917519009061744}
   - component: {fileID: 8544139824372022991}
+  - component: {fileID: 765800043255450039}
   - component: {fileID: 5924823514030375831}
   m_Layer: 0
   m_Name: EnemyAI (Melee)
@@ -317,6 +318,7 @@ MonoBehaviour:
   playerSightedChecker: {fileID: 2615316958505654335}
   fleeState: {fileID: 2443917519009061744}
   healthManager: {fileID: 8544139824372022991}
+  healthRegenerator: {fileID: 765800043255450039}
   playerApproacher: {fileID: 7060598104670205753}
   attackStateMeleeManager: {fileID: 362599461454696860}
 --- !u!114 &502059198281291301
@@ -461,6 +463,22 @@ MonoBehaviour:
   healthRemainingToEnableFleeState: 5
   enemyAI: {fileID: 9115038522147109054}
   debugMode: 1
+--- !u!114 &765800043255450039
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3438584476614280132}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d9b739eeb3f11846a055dc6ffd4f7ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthToRegenerateBy: 5
+  waitBetweenHealthIncrement: 2.5
+  healthToStopRegeneratingAt: 0
+  healthManager: {fileID: 8544139824372022991}
 --- !u!54 &5924823514030375831
 Rigidbody:
   m_ObjectHideFlags: 0

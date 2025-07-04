@@ -31,10 +31,10 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public void CallFleeCycleCoroutine()
         {
-            //Debug.Log("AI is in the flee state!");
-
             if (currentFleeCycle == null)
             {
+                Debug.Log("AI is in the flee state!");
+                enemyAIMovePointIndex = 0;
                 currentFleeCycle = StartCoroutine(Flee());
             }
         }
@@ -49,7 +49,8 @@ namespace SAE.GAD176.P1.EnemyAI
                 Vector3 pointToTravelTo = enemyAIMovePoints[enemyAIMovePointIndex].position;
                 rotateDirection = pointToTravelTo - transform.position;
 
-                while (Vector3.Distance(transform.position, pointToTravelTo) > 0f)
+                // enemyAI.GetFleeStateBool added so that we stop properly, so our vector calclation for how far we need to move in IdelStateManager aren't messed with
+                while (Vector3.Distance(transform.position, pointToTravelTo) > 0f && enemyAI.GetFleeStateBool())
                 {
                     MoveAndTurn(pointToTravelTo);
 
@@ -59,8 +60,6 @@ namespace SAE.GAD176.P1.EnemyAI
                 if (enemyAIMovePointIndex < 3)
                 {
                     enemyAIMovePointIndex++;
-
-                    Debug.Log("enemyAIMovePointIndex is now = " + enemyAIMovePointIndex);
                 }
                 else
                 {
@@ -69,6 +68,9 @@ namespace SAE.GAD176.P1.EnemyAI
 
                 yield return null;
             }
+
+            // Reset so the Flee Cycle can begin again when the conditions are once again met
+            currentFleeCycle = null;
         }
 
         private void MoveAndTurn(Vector3 pointToTravelTo)

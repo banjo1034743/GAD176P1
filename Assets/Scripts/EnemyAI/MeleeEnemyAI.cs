@@ -19,15 +19,16 @@ namespace SAE.GAD176.P1.EnemyAI
         #region Methods
         public override void AttackState()
         {
-            if (!playerApproacher.DistanceFromPlayerCheck())
+            switch (playerApproacher.DistanceFromPlayerCheck())
             {
-                attackStateMeleeManager.ClearCoroutine();
-                playerApproacher.MoveTowardPlayer();
-            }
-            else
-            {
-                Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
-                attackStateMeleeManager.Attack();
+                case false:
+                    attackStateMeleeManager.ClearCoroutine();
+                    playerApproacher.MoveTowardPlayer();
+                    break;
+                case true:
+                    Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
+                    attackStateMeleeManager.Attack();
+                    break;
             }
 
         }
@@ -47,13 +48,29 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private void Update()
         {
+            if (healthManager.GetHealth() == healthManager.GetMaxHealth() && !isIdleStateEnabled && !isAttackStateEnabled && !isFleeStateEnabled)
+            {
+                Debug.Log("Called IdleState from Update in MeleeEnemyAI");
+                IdleState();
+            }
+
             if (isAttackStateEnabled)
             {
                 AttackState();
             }
-            if (isFleeStateEnabled)
+            else if (!isAttackStateEnabled && healthManager.GetHealth() <= healthManager.GetHealthRemainingToEnableFleeState())
             {
+                StartRegeneratingHealth();
+            }
+
+            if (healthManager.GetHealth() < healthManager.GetMaxHealth())
+            {
+                Debug.Log("Called FleeState from Update in MeleeEnemyAI");
                 FleeState();
+            }
+            else if (healthManager.GetHealth() == healthManager.GetMaxHealth())
+            {
+                isFleeStateEnabled = false;
             }
         }
 

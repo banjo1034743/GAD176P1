@@ -39,18 +39,13 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             while (enemyAI.GetIdleStateBool())
             {
-                //Debug.Log("We're moving at the rate of: " + enemyRB.velocity);
+                Debug.Log("While loop in StartWalkCycle called in IdleStateManager");
 
                 Vector3 pointToTravelTo = transform.position + new Vector3(0, 0, 5);
 
                 while (transform.position.z < pointToTravelTo.z)
                 {
                     transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
-
-                    //if (!onGroundChecker.GetOnGroundValue())
-                    //{
-                    //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                    //}
 
                     yield return null;
                 }
@@ -71,11 +66,6 @@ namespace SAE.GAD176.P1.EnemyAI
                 {
                     transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, movementSpeed * Time.deltaTime);
 
-                    //if (!onGroundChecker.GetOnGroundValue())
-                    //{
-                    //    transform.position = new Vector3(transform.position.x, 0, transform.position.z);
-                    //}
-
                     yield return null;
                 }
 
@@ -88,6 +78,9 @@ namespace SAE.GAD176.P1.EnemyAI
                     yield return null;
                 }
             }
+
+            StopCoroutine(currentWalkCycle);
+            currentWalkCycle = null;
         }
         #endregion
 
@@ -97,7 +90,7 @@ namespace SAE.GAD176.P1.EnemyAI
             // Will run in background to ensure the whole movement is stopped no matter where in walk cycle AI is
             if (!enemyAI.GetIdleStateBool() && currentWalkCycle != null)
             {
-                //Debug.Log("Coroutine called to stop!");
+                Debug.Log("Coroutine called to stop!");
                 StopCoroutine(currentWalkCycle);
             }
         }
