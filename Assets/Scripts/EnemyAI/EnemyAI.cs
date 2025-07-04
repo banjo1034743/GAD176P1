@@ -54,7 +54,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
         }
 
-        public void FleeState()
+        public virtual void FleeState()
         {
             DisableStates();
             isFleeStateEnabled = true;

@@ -4,42 +4,25 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public class MeleeEnemyAI : EnemyAI, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
+    public class RangedEnemyAI : EnemyAI, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
-        #region Variables
-
-        [Header("Scripts")]
-
-        [SerializeField] private PlayerApproacher playerApproacher;
-
-        [SerializeField] private AttackStateMeleeManager attackStateMeleeManager;
-
-        #endregion
+        [SerializeField] private float distanceRequiredToFlee;
 
         #region Methods
+
         public override void AttackState()
         {
-            switch (playerApproacher.DistanceFromPlayerCheck())
-            {
-                case false:
-                    attackStateMeleeManager.ClearCoroutine();
-                    playerApproacher.MoveTowardPlayer();
-                    break;
-                case true:
-                    Debug.Log("Take that! I, " + transform.name + ", am attacking you!");
-                    attackStateMeleeManager.Attack();
-                    break;
-            }
-
+            
         }
 
         public override void FleeState()
         {
-            base.FleeState();
+            
         }
+
         #endregion
 
-        #region Unity Functions
+        #region Unity Methods
 
         private void Start()
         {
