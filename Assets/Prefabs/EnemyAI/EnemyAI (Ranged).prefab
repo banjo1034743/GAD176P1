@@ -267,15 +267,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5637407450155935307}
-  - component: {fileID: 1248786413484739252}
+  - component: {fileID: 2908035468246791382}
   - component: {fileID: 6828804156099813790}
   - component: {fileID: 4057185861068946076}
   - component: {fileID: 879794459643821807}
   - component: {fileID: 1928402610077864618}
-  - component: {fileID: 5509980285822219463}
-  - component: {fileID: 8496226953059385523}
+  - component: {fileID: 3152987596103506713}
+  - component: {fileID: 328129024502049579}
   - component: {fileID: 7762898112532298632}
-  - component: {fileID: 1808903705908837918}
+  - component: {fileID: 6871235357630344774}
   - component: {fileID: 1642387395602792968}
   - component: {fileID: 4543780342228003924}
   - component: {fileID: 8221738334479617213}
@@ -303,7 +303,7 @@ Transform:
   - {fileID: 6499836199557510456}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
---- !u!114 &1248786413484739252
+--- !u!114 &2908035468246791382
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -312,20 +312,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 6533717882093846016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 111fac4ea7bb6a74a9c044884ad641eb, type: 3}
+  m_Script: {fileID: 11500000, guid: 617c1dc03278cc64e92311b10754b00d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleState: {fileID: 6828804156099813790}
+  idleStateManager: {fileID: 6828804156099813790}
   playerSightedChecker: {fileID: 4057185861068946076}
-  fleeState: {fileID: 1808903705908837918}
+  fleeStateManager: {fileID: 6871235357630344774}
   healthManager: {fileID: 1642387395602792968}
   healthRegenerator: {fileID: 4543780342228003924}
   enemyAIDestroyer: {fileID: 8221738334479617213}
+  playerApproacher: {fileID: 879794459643821807}
   isIdleStateEnabled: 0
   isAttackStateEnabled: 0
   isFleeStateEnabled: 0
-  playerApproacher: {fileID: 879794459643821807}
-  attackStateMeleeManager: {fileID: 5509980285822219463}
+  attackStateRangedManager: {fileID: 3152987596103506713}
 --- !u!114 &6828804156099813790
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -341,7 +341,7 @@ MonoBehaviour:
   movementSpeed: 1
   turnSpeed: 50
   enemyRB: {fileID: 1700215149531982720}
-  enemyAI: {fileID: 1248786413484739252}
+  enemyAI: {fileID: 2908035468246791382}
   onGroundChecker: {fileID: 1928402610077864618}
 --- !u!114 &4057185861068946076
 MonoBehaviour:
@@ -388,7 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddd09d76409d97b43a8ce03706e5dc40, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &5509980285822219463
+--- !u!114 &3152987596103506713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -397,16 +397,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 6533717882093846016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 29cdf4e12ea546243b20455ce40c8897, type: 3}
+  m_Script: {fileID: 11500000, guid: e2f2b0351f5a1204fa66392b024452da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 5
-  distanceToAttackFrom: 2.5
-  attackCooldown: 0.5
+  attackDamage: 0
+  distanceToAttackFrom: 0
+  attackCooldown: 0
   distanceFromPlayerChecker: {fileID: 7762898112532298632}
-  playerApproacher: {fileID: 879794459643821807}
-  enemyMeleeAnimationManager: {fileID: 8496226953059385523}
---- !u!114 &8496226953059385523
+--- !u!114 &328129024502049579
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -415,11 +413,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 6533717882093846016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ca6adbecbf064d4babb3461a6304658, type: 3}
+  m_Script: {fileID: 11500000, guid: 16be79ed001e1d445b6bc546e7a03326, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
-  animationController: {fileID: 7673894663361142551}
 --- !u!114 &7762898112532298632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -433,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerApproacher: {fileID: 879794459643821807}
---- !u!114 &1808903705908837918
+--- !u!114 &6871235357630344774
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -442,16 +438,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 6533717882093846016}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: edfc81d211194b947ac4f9c80d536750, type: 3}
+  m_Script: {fileID: 11500000, guid: c6630a32db179fe47915b0dadc38f6d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fleeingMovementSpeed: 4
+  fleeingMovementSpeed: 5
   enemyAIMovePoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  enemyAI: {fileID: 1248786413484739252}
+  enemyAI: {fileID: 2908035468246791382}
 --- !u!114 &1642387395602792968
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -467,9 +463,8 @@ MonoBehaviour:
   enemyAIHealth: 25
   enemyAIMaxHealth: 0
   healthRemainingToEnableFleeState: 5
-  enemyAI: {fileID: 1248786413484739252}
+  enemyAI: {fileID: 2908035468246791382}
   healthRegenerator: {fileID: 4543780342228003924}
-  enemyMeleeAnimationManager: {fileID: 0}
   debugMode: 1
 --- !u!114 &4543780342228003924
 MonoBehaviour:

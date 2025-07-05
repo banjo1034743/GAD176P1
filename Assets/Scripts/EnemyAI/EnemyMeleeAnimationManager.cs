@@ -6,34 +6,44 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public class EnemyMeleeAnimationManager : MonoBehaviour
     {
-        private int canPlayAttackAnim;
+        #region Variables
 
-        [SerializeField] private AnimationClip meleeAttackClip;
+        [Header("Data")]
+
+        private int canPlayAttackAnimationParameterCode;
+
+        [Header("Components")]
+
+        [SerializeField] private AnimationClip meleeAttackAnimationClip;
 
         [SerializeField] private Animator animationController;
 
-        private void Start()
-        {
-            canPlayAttackAnim = Animator.StringToHash("canPlayAttackAnimation");
-        }
+        [Header("Scripts")]
+
+        [SerializeField] private EnemyAI enemyAI;
+
+        #endregion
+
+        #region Methods
 
         public void SetCanPlayAttackAnimationBool(bool value)
         {
-            animationController.SetBool(canPlayAttackAnim, value);
+            animationController.SetBool(canPlayAttackAnimationParameterCode, value);
         }
 
         public bool GetCanPlayAttackAnimationValue()
         {
-            return animationController.GetBool(canPlayAttackAnim);
+            return animationController.GetBool(canPlayAttackAnimationParameterCode);
         }
 
         public float GetAttackAnimationLength()
         {
-            return meleeAttackClip.length;
+            return meleeAttackAnimationClip.length;
         }
 
         public void StopAnimation()
         {
+            SetCanPlayAttackAnimationBool(false);
             animationController.enabled = false;
         }
 
@@ -41,5 +51,24 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             animationController.enabled = true;
         }
+
+        #endregion
+
+        #region Unity Methods
+
+        private void Start()
+        {
+            canPlayAttackAnimationParameterCode = Animator.StringToHash("canPlayAttackAnimation");
+        }
+
+        private void Update()
+        {
+            if (enemyAI.GetFleeStateBool() && GetCanPlayAttackAnimationValue())
+            {
+                StopAnimation();
+            }
+        }
+
+        #endregion
     }
 }

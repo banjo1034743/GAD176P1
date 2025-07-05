@@ -10,26 +10,28 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [Header("Data")]
 
-        [SerializeField] private float fleeingMovementSpeed = 5f;
+        [SerializeField] protected float fleeingMovementSpeed = 5f;
 
-        private int enemyAIMovePointIndex = 0;
+        protected int enemyAIMovePointIndex = 0;
 
-        private Coroutine currentFleeCycle = null;
+        protected Coroutine currentFleeCycle = null;
 
-        private Vector3 rotateDirection;
+        protected Vector3 rotateDirection;
 
         [Header("Components")]
 
         // These are points in the world where the AI will move toward in rotational pattern one at a time when in the Flee state
-        [SerializeField] private Transform[] enemyAIMovePoints;
+        [SerializeField] protected Transform[] enemyAIMovePoints;
         
         [Header("Scripts")]
 
-        [SerializeField] private EnemyAI enemyAI;
+        [SerializeField] protected EnemyAI enemyAI;
 
         #endregion
 
-        public void CallFleeCycleCoroutine()
+        #region Methods
+
+        public virtual void CallFleeCycleCoroutine()
         {
             if (currentFleeCycle == null)
             {
@@ -39,7 +41,7 @@ namespace SAE.GAD176.P1.EnemyAI
             }
         }
 
-        private IEnumerator Flee()
+        protected virtual IEnumerator Flee()
         {
             while (enemyAI.GetFleeStateBool())
             {
@@ -73,7 +75,7 @@ namespace SAE.GAD176.P1.EnemyAI
             currentFleeCycle = null;
         }
 
-        private void MoveAndTurn(Vector3 pointToTravelTo)
+        protected void MoveAndTurn(Vector3 pointToTravelTo)
         {
             transform.position = Vector3.MoveTowards(transform.position, pointToTravelTo, fleeingMovementSpeed * Time.deltaTime);
 
@@ -82,9 +84,11 @@ namespace SAE.GAD176.P1.EnemyAI
             transform.rotation = Quaternion.LookRotation(newDirection, Vector3.up);
         }
 
+        #endregion
+
         #region Unity Methods
 
-        private void Start()
+        protected virtual void Start()
         {
             Debug.Log("enemyAIMovePointIndex is now = " + enemyAIMovePointIndex);
         }

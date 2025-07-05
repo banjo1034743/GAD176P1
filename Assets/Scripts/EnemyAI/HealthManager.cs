@@ -23,8 +23,6 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private HealthRegenerator healthRegenerator;
 
-        [SerializeField] private EnemyMeleeAnimationManager enemyMeleeAnimationManager;
-
         #endregion
 
         #region Debug Variables
@@ -70,8 +68,7 @@ namespace SAE.GAD176.P1.EnemyAI
             if (enemyAIHealth <= healthRemainingToEnableFleeState && enemyAIHealth > 0 && !enemyAI.GetFleeStateBool())
             {
                 Debug.Log("Called FleeState from CheckIfHealthRemainEnablesFleestate in Health Manager");
-                enemyMeleeAnimationManager.StopAnimation();
-                enemyAI.FleeState();
+                enemyAI.FleeState(); // Not entirely adhering to encapsultion, should once Ranged Enemy AI is fully implemented
             }
         } 
 
@@ -79,10 +76,6 @@ namespace SAE.GAD176.P1.EnemyAI
 
         #region Unity Methods
 
-        /// <summary>
-        /// We call this code in Awake() to ensure that we set enemyAIMaxHealth to enemyHealth before HealthRegenerator calles GetMaxHealth()
-        /// (Remove if keeping as Start ends up working fine with the check added in HealthRegenerator)
-        /// </summary>
         private void Start()
         {
             enemyAIMaxHealth = enemyAIHealth;

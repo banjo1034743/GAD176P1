@@ -10,8 +10,6 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [Header("Scripts")]
 
-        [SerializeField] private PlayerApproacher playerApproacher;
-
         [SerializeField] private AttackStateMeleeManager attackStateMeleeManager;
 
         #endregion

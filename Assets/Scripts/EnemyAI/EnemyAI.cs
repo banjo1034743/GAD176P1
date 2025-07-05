@@ -4,16 +4,17 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
+    public abstract class EnemyAI : MonoBehaviour, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
         [Header("Scripts")]
 
-        [SerializeField] protected IdleStateManager idleState;
+        [SerializeField] protected IdleStateManager idleStateManager;
         [SerializeField] protected PlayerSightedChecker playerSightedChecker;
-        [SerializeField] protected FleeStateManager fleeState;
+        [SerializeField] protected FleeStateManager fleeStateManager;
         [SerializeField] protected HealthManager healthManager;
         [SerializeField] protected HealthRegenerator healthRegenerator;
         [SerializeField] protected EnemyAIDestroyer enemyAIDestroyer;
+        [SerializeField] protected PlayerApproacher playerApproacher;
 
         [Header("Data")]
 
@@ -27,7 +28,7 @@ namespace SAE.GAD176.P1.EnemyAI
             DisableStates();
             isIdleStateEnabled = true;
 
-            idleState.CallWalkCycleCoroutine();
+            idleStateManager.CallWalkCycleCoroutine();
         }
 
         // Called by IdleStateManager to check the value to know when to end the walk cycle loop
@@ -47,19 +48,19 @@ namespace SAE.GAD176.P1.EnemyAI
         }
 
         /// <summary>
-        /// This is overriden, with content added to it, in the children of this class
+        /// This is overriden, with content added to it, in the children of this class. This must be overriden by any children inheriting from Enemy AI
         /// </summary>
-        public virtual void AttackState()
-        {
+        public abstract void AttackState();
 
-        }
-
+        /// <summary>
+        /// We want to keep a base functionality which will be most generally used, but we also want to override it for the uniqu conditions for fleeing by the RangedEnemyAI class
+        /// </summary>
         public virtual void FleeState()
         {
             DisableStates();
             isFleeStateEnabled = true;
 
-            fleeState.CallFleeCycleCoroutine();
+            fleeStateManager.CallFleeCycleCoroutine();
         }
 
         public bool GetFleeStateBool()
@@ -75,11 +76,6 @@ namespace SAE.GAD176.P1.EnemyAI
         public void CallDestroySelf()
         {
             enemyAIDestroyer.DestroySelf();
-        }
-
-        public void EnableFleeState()
-        {
-            isFleeStateEnabled = true;
         }
 
         protected void DisableStates()

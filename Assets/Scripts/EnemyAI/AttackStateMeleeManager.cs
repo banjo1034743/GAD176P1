@@ -7,15 +7,7 @@ namespace SAE.GAD176.P1.EnemyAI
     {
         #region Variables
 
-        [Header("Data (Melee)")]
-
-        private Coroutine attackCoroutine = null;
-
         [Header("Scripts (Melee)")]
-
-        [SerializeField] private DistanceFromPlayerChecker distanceFromPlayerChecker;
-
-        [SerializeField] private PlayerApproacher playerApproacher;
 
         [SerializeField] private EnemyMeleeAnimationManager enemyMeleeAnimationManager;
 
@@ -31,11 +23,11 @@ namespace SAE.GAD176.P1.EnemyAI
                 //Debug.Log("attackCoroutine wa null");
 
                 enemyMeleeAnimationManager.StartAnimation();
-                attackCoroutine = StartCoroutine(AttackCoroutine());
+                attackCoroutine = StartCoroutine(MeleeAttackCoroutine());
             }
         }
 
-        private IEnumerator AttackCoroutine()
+        private IEnumerator MeleeAttackCoroutine()
         {
             //Debug.Log("Attack called in AttackStateMeleeManager");
 

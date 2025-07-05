@@ -6,7 +6,13 @@ namespace SAE.GAD176.P1.EnemyAI
 {
     public class RangedEnemyAI : EnemyAI, IIdleFunctionality, IAttackFunctionality, IFleeFunctionality, IHealthFunctionality, IKillableFunctionality, IPlayerCheckerFunctionality
     {
-        [SerializeField] private float distanceRequiredToFlee;
+        #region Variables
+
+        [Header("Scripts")]
+
+        [SerializeField] private AttackStateRangedManager attackStateRangedManager;
+
+        #endregion
 
         #region Methods
 
@@ -17,7 +23,10 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public override void FleeState()
         {
-            
+            DisableStates();
+            isFleeStateEnabled = true;
+
+            fleeStateManager.CallFleeCycleCoroutine();
         }
 
         #endregion
@@ -42,7 +51,7 @@ namespace SAE.GAD176.P1.EnemyAI
                 IdleState();
             }
 
-            if (isAttackStateEnabled)
+            if (isAttackStateEnabled && Vector3.Distance(transform.position, playerApproacher.GetPlayerTransform().position) < attackStateRangedManager.GetDistanceToAttackFrom())
             {
                 AttackState();
             }

@@ -1041,6 +1041,30 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 09aade0ecefd01e4b8f7661acf64f5c2, type: 3}
+--- !u!4 &2084445385 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7290362376026555272, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2084445384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2084445386 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3664841334801828491, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2084445384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2084445387 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1509557816914412546, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2084445384}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2084445388 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5807610247619498897, guid: 09aade0ecefd01e4b8f7661acf64f5c2,
+    type: 3}
+  m_PrefabInstance: {fileID: 2084445384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &60889539378096550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1185,16 +1209,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1642387395602792968, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
-        type: 3}
-      propertyPath: enemyAI
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 1808903705908837918, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
-        type: 3}
-      propertyPath: enemyAI
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 5637407450155935307, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1250,13 +1264,27 @@ PrefabInstance:
       propertyPath: m_Name
       value: EnemyAI (Ranged)
       objectReference: {fileID: 0}
-    - target: {fileID: 6828804156099813790, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
+    - target: {fileID: 6871235357630344774, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
         type: 3}
-      propertyPath: enemyAI
+      propertyPath: enemyAIMovePoints.Array.data[0]
       value: 
-      objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 1248786413484739252, guid: 8d51db01be3b6704eb3c7dbdb26a762f, type: 3}
+      objectReference: {fileID: 2084445388}
+    - target: {fileID: 6871235357630344774, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
+        type: 3}
+      propertyPath: enemyAIMovePoints.Array.data[1]
+      value: 
+      objectReference: {fileID: 2084445387}
+    - target: {fileID: 6871235357630344774, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
+        type: 3}
+      propertyPath: enemyAIMovePoints.Array.data[2]
+      value: 
+      objectReference: {fileID: 2084445386}
+    - target: {fileID: 6871235357630344774, guid: 8d51db01be3b6704eb3c7dbdb26a762f,
+        type: 3}
+      propertyPath: enemyAIMovePoints.Array.data[3]
+      value: 
+      objectReference: {fileID: 2084445385}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
