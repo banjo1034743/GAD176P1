@@ -315,16 +315,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 111fac4ea7bb6a74a9c044884ad641eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  idleState: {fileID: 502059198281291301}
+  idleStateManager: {fileID: 502059198281291301}
   playerSightedChecker: {fileID: 2615316958505654335}
-  fleeState: {fileID: 2443917519009061744}
+  fleeStateManager: {fileID: 2443917519009061744}
   healthManager: {fileID: 8544139824372022991}
   healthRegenerator: {fileID: 765800043255450039}
   enemyAIDestroyer: {fileID: 2768673573482026567}
+  playerApproacher: {fileID: 7060598104670205753}
   isIdleStateEnabled: 0
   isAttackStateEnabled: 0
   isFleeStateEnabled: 0
-  playerApproacher: {fileID: 7060598104670205753}
   attackStateMeleeManager: {fileID: 362599461454696860}
 --- !u!114 &502059198281291301
 MonoBehaviour:
@@ -418,8 +418,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ca6adbecbf064d4babb3461a6304658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  meleeAttackClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
+  attackAnimationClip: {fileID: 7400000, guid: a3566cd57c8e4374f9ef921c90d9f78d, type: 2}
   animationController: {fileID: 5564612570411833878}
+  enemyAI: {fileID: 9115038522147109054}
 --- !u!114 &1030152790848371893
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -469,7 +470,6 @@ MonoBehaviour:
   healthRemainingToEnableFleeState: 5
   enemyAI: {fileID: 9115038522147109054}
   healthRegenerator: {fileID: 765800043255450039}
-  enemyMeleeAnimationManager: {fileID: 0}
   debugMode: 1
 --- !u!114 &765800043255450039
 MonoBehaviour:

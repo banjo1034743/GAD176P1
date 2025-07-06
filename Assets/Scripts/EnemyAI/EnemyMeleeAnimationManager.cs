@@ -4,69 +4,38 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public class EnemyMeleeAnimationManager : MonoBehaviour
+    public class EnemyMeleeAnimationManager : EnemyAnimationManager
     {
         #region Variables
 
-        [Header("Data")]
-
-        private int canPlayAttackAnimationParameterCode;
-
-        [Header("Components")]
-
-        [SerializeField] private AnimationClip meleeAttackAnimationClip;
-
-        [SerializeField] private Animator animationController;
-
-        [Header("Scripts")]
-
-        [SerializeField] private EnemyAI enemyAI;
+        
 
         #endregion
 
         #region Methods
 
-        public void SetCanPlayAttackAnimationBool(bool value)
+        public override void StartAnimation()
         {
-            animationController.SetBool(canPlayAttackAnimationParameterCode, value);
+            base.StartAnimation();
         }
 
-        public bool GetCanPlayAttackAnimationValue()
+        public override void StopAnimation()
         {
-            return animationController.GetBool(canPlayAttackAnimationParameterCode);
-        }
-
-        public float GetAttackAnimationLength()
-        {
-            return meleeAttackAnimationClip.length;
-        }
-
-        public void StopAnimation()
-        {
-            SetCanPlayAttackAnimationBool(false);
-            animationController.enabled = false;
-        }
-
-        public void StartAnimation()
-        {
-            animationController.enabled = true;
+            base.StopAnimation();   
         }
 
         #endregion
 
         #region Unity Methods
 
-        private void Start()
+        protected override void Start()
         {
-            canPlayAttackAnimationParameterCode = Animator.StringToHash("canPlayAttackAnimation");
+            canPlayAttackAnimationParameterCode = Animator.StringToHash("canPlayMeleeAttackAnimation");
         }
 
-        private void Update()
+        protected override void Update()
         {
-            if (enemyAI.GetFleeStateBool() && GetCanPlayAttackAnimationValue())
-            {
-                StopAnimation();
-            }
+            base.Update();
         }
 
         #endregion

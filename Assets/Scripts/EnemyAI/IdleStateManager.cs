@@ -57,6 +57,11 @@ namespace SAE.GAD176.P1.EnemyAI
                     Debug.Log("We are rotating");
 
                     transform.Rotate(Vector3.up * turnSpeed * Time.deltaTime);
+
+                    //Vector3 newDirection = Vector3.RotateTowards(transform.forward, pointToTravelTo, turnSpeed * Time.deltaTime, 0);
+
+                    //transform.rotation = Quaternion.LookRotation(newDirection, Vector3.up);
+
                     yield return null;
                 }
 
@@ -94,6 +99,7 @@ namespace SAE.GAD176.P1.EnemyAI
                 StopCoroutine(currentWalkCycle);
             }
         }
+
         #endregion
     }
 }

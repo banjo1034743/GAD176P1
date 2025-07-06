@@ -4,11 +4,35 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
 {
-    public class EnemyRangedAnimationManager : MonoBehaviour
+    public class EnemyRangedAnimationManager : EnemyAnimationManager
     {
-        public void StartAnimation()
-        {
+        #region Methods
 
+        public override void StartAnimation()
+        {
+            base.StartAnimation();
         }
+
+        public override void StopAnimation()
+        {
+            base.StopAnimation();
+        }
+
+        #endregion
+
+        #region Unity Methods
+
+        protected override void Start()
+        {
+            canPlayAttackAnimationParameterCode = Animator.StringToHash("canPlayRangedAttackAnimation");
+            StopAnimation();
+        }
+
+        protected override void Update()
+        {
+            base.Update();
+        }
+
+        #endregion
     }
 }
