@@ -328,11 +328,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attackDamage: 2.5
-  distanceToAttackFrom: 5
+  distanceToAttackFrom: 15
   attackCooldown: 1
   distanceFromPlayerChecker: {fileID: 7762898112532298632}
   playerApproacher: {fileID: 879794459643821807}
   pillowProjectileSpeed: 10
+  amplitude: 2
+  frequency: 1
   pillowProjectile: {fileID: 339540283770652276, guid: 12af78e48e243394a8a7582755632fb6,
     type: 3}
   pillowProjectileHoldingPoint: {fileID: 5338082102556754253}
@@ -437,7 +439,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6533717882093846016}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9be91bf995ade904080c3238cd9faddf, type: 2}
   m_CullingMode: 0

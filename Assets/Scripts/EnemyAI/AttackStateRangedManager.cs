@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
@@ -9,6 +10,10 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Data (Ranged)")]
 
         [SerializeField] private float pillowProjectileSpeed = 10f;
+
+        [SerializeField] private float amplitude = 1.0f;
+
+        [SerializeField] private float frequency = 1.0f;
 
         [Header("Objects (Ranged)")]
 
@@ -24,11 +29,11 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public override void Attack()
         {
-            //Debug.Log("Attack() in AttackStateRangedManager has been called");
+            Debug.Log("Attack() in AttackStateRangedManager has been called");
 
             if (attackCoroutine == null)
             {
-                //Debug.Log("attackCoroutine in AttackStateRangedManager is null");
+                Debug.Log("attackCoroutine in AttackStateRangedManager is null");
 
                 attackCoroutine = StartCoroutine(RangedAttackCoroutine());
             }
@@ -53,18 +58,17 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return new WaitForSeconds(enemyRangedAnimationManager.GetAttackAnimationLength());
 
                 // Instantiate pillow prefab
-                if (pillowProjectile == null)
-                {
-                    pillowProjectile = Instantiate(pillowProjectile);
-                    pillowProjectile.transform.position = pillowProjectileHoldingPoint.position;
-                }
+                pillowProjectile = Instantiate(pillowProjectile);
+                pillowProjectile.transform.position = pillowProjectileHoldingPoint.position;
 
-                // Apply force to move pillow in calculated arc
+                //apply force to move pillow in calculated arc
                 while (Vector3.Distance(pillowProjectile.transform.position, playerPosition) > 0.1f)
                 {
-                    // When we have player position, calculate angle for pillow arc
-                    Vector3 pillowTrajectoryAngle = Vector3.Slerp(transform.position, playerPosition, pillowProjectileSpeed * Time.deltaTime);
-                    pillowProjectile.transform.position = pillowTrajectoryAngle;
+                    // when we have player position, calculate angle for pillow arc
+                    float pillowTrajectoryAngle = (transform.position.y + amplitude) * Mathf.Sin(Time.time * frequency);
+                    Vector3 pillowTravelDirection = Vector3.MoveTowards(pillowProjectile.transform.position, playerPosition, pillowProjectileSpeed * Time.deltaTime);
+
+                    pillowProjectile.transform.position = new Vector3(pillowTravelDirection.x, pillowTrajectoryAngle, pillowTravelDirection.z);
 
                     yield return null;
                 }
@@ -74,14 +78,5 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return new WaitForSeconds(attackCooldown);
             }
         }
-
-        #region Unity Methods
-
-        private void Start()
-        {
-            pillowProjectile = null;
-        }
-
-        #endregion
     }
 }

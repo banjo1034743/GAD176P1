@@ -18,7 +18,8 @@ namespace SAE.GAD176.P1.EnemyAI
 
         public override void AttackState()
         {
-            
+            Debug.Log("AttackState in RangedEnemyAI called");
+            attackStateRangedManager.Attack();
         }
 
         public override void FleeState()
