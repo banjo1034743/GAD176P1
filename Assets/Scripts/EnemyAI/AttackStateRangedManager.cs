@@ -11,13 +11,14 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private float pillowProjectileSpeed = 10f;
 
-        [SerializeField] private float amplitude = 1.0f;
+        [SerializeField] private float pillowThrowingArcPeak = 10f;
 
-        [SerializeField] private float frequency = 1.0f;
+        [Tooltip("This is what we use for calculating the angle of the arc trajectory of the pillow thrown")]
+        [SerializeField] private AnimationCurve animationCurve;
 
         [Header("Objects (Ranged)")]
 
-        [SerializeField] private GameObject pillowProjectile;
+        [SerializeField] private GameObject pillowProjectilePrefab;
 
         [Header("Components (Ranged)")]
 
@@ -48,9 +49,6 @@ namespace SAE.GAD176.P1.EnemyAI
         {
             while (distanceFromPlayerChecker.CheckDistanceFromPlayer() < distanceToAttackFrom)
             {
-                // Find player position
-                Vector3 playerPosition = playerApproacher.GetPlayerTransform().position;
-
                 // Play animation for throwing
                 enemyRangedAnimationManager.StartAnimation();
 
@@ -58,21 +56,50 @@ namespace SAE.GAD176.P1.EnemyAI
                 yield return new WaitForSeconds(enemyRangedAnimationManager.GetAttackAnimationLength());
 
                 // Instantiate pillow prefab
-                pillowProjectile = Instantiate(pillowProjectile);
+                GameObject pillowProjectile = Instantiate(pillowProjectilePrefab, pillowProjectileHoldingPoint.position + new Vector3(0, 0, 2.5f), Quaternion.identity);
                 pillowProjectile.transform.position = pillowProjectileHoldingPoint.position;
 
                 //apply force to move pillow in calculated arc
-                while (Vector3.Distance(pillowProjectile.transform.position, playerPosition) > 0.1f)
+                while (pillowProjectile != null)
                 {
                     // when we have player position, calculate angle for pillow arc
-                    float pillowTrajectoryAngle = (transform.position.y + amplitude) * Mathf.Sin(Time.time * frequency);
-                    Vector3 pillowTravelDirection = Vector3.MoveTowards(pillowProjectile.transform.position, playerPosition, pillowProjectileSpeed * Time.deltaTime);
+                    Debug.Log("while loop in other while loop in RangedAttackCoroutine in AttackStateRangedManager called!");
 
-                    pillowProjectile.transform.position = new Vector3(pillowTravelDirection.x, pillowTrajectoryAngle, pillowTravelDirection.z);
+                    Vector3 pillowThrowingRange = playerApproacher.GetPlayerTransform().position - pillowProjectile.transform.position;
+
+                    if (pillowThrowingRange.z < 0)
+                    {
+                        pillowProjectileSpeed = -pillowProjectileSpeed;
+                    }
+
+                    // adding speed value to forward dir by time.deltatime
+                    float zPos = pillowProjectile.transform.position.z + pillowProjectileSpeed * Time.deltaTime;
+
+                    // normalizing the new value above and initialiing a new var with its value
+                    float zPosNormalized = (zPos - pillowProjectileHoldingPoint.position.z) / pillowThrowingRange.z;
+
+                    // Normalise value for variable for y pos by calling Evaluate() and inputing normalized z var value
+                    float yPosNormalized = animationCurve.Evaluate(zPosNormalized);
+
+                    float yPosAbsolute = yPosNormalized * pillowThrowingRange.y;
+
+                    // Initialise new var for nonnormalised y pos vr with the normalized y var * a var for peak of arc
+                    float yPos = pillowProjectileHoldingPoint.position.y + yPosNormalized * pillowThrowingArcPeak + yPosNormalized;
+
+                    // create new vector3 of of the z and y values
+                    Vector3 newPos = new Vector3(0, yPos, zPos);
+
+                    // Set position to new vector3
+                    pillowProjectile.transform.position = newPos;
+
+                    if (Vector3.Distance(pillowProjectile.transform.position, playerApproacher.GetPlayerTransform().position) < 1f)
+                    {
+                        Debug.Log("Destroyed pillow");
+                        Destroy(pillowProjectile);
+                    }
 
                     yield return null;
                 }
-
                 // Wait for certain amount of seconds before repeating
 
                 yield return new WaitForSeconds(attackCooldown);

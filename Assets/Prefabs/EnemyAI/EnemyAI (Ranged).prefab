@@ -332,10 +332,42 @@ MonoBehaviour:
   attackCooldown: 1
   distanceFromPlayerChecker: {fileID: 7762898112532298632}
   playerApproacher: {fileID: 879794459643821807}
-  pillowProjectileSpeed: 10
-  amplitude: 2
-  frequency: 1
-  pillowProjectile: {fileID: 339540283770652276, guid: 12af78e48e243394a8a7582755632fb6,
+  pillowProjectileSpeed: 1
+  pillowThrowingArcPeak: 3
+  animationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 3.9952838
+      outSlope: 3.9952838
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.057854246
+    - serializedVersion: 3
+      time: 0.4999736
+      value: 0.999999
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 0.99999917
+      value: -0.000000059604645
+      inSlope: -4.28066
+      outSlope: -4.28066
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.049584236
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  pillowProjectilePrefab: {fileID: 339540283770652276, guid: 12af78e48e243394a8a7582755632fb6,
     type: 3}
   pillowProjectileHoldingPoint: {fileID: 5338082102556754253}
   enemyRangedAnimationManager: {fileID: 328129024502049579}
