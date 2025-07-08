@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - CinemachineTarget
+  - PillowMelee
+  - PillowRanged
   - Weapon
   layers:
   - Default

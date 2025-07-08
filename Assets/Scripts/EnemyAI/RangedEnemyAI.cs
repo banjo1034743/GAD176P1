@@ -30,6 +30,11 @@ namespace SAE.GAD176.P1.EnemyAI
             fleeStateManager.CallFleeCycleCoroutine();
         }
 
+        public bool GetIsAttackStateEnabled()
+        {
+            return isAttackStateEnabled;
+        }
+
         #endregion
 
         #region Unity Methods

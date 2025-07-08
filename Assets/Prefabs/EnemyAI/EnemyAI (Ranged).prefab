@@ -164,7 +164,7 @@ GameObject:
   - component: {fileID: 5338082102556754253}
   m_Layer: 0
   m_Name: PillowHoldingPosition
-  m_TagString: Weapon
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -299,7 +299,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df056221370483549919189055538203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 3
+  movementSpeed: 1
   distanceToAttackFrom: 1.5
   playerTransform: {fileID: 0}
   onGroundChecker: {fileID: 0}
@@ -327,12 +327,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2f2b0351f5a1204fa66392b024452da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDamage: 2.5
+  attackDamage: 2
   distanceToAttackFrom: 15
   attackCooldown: 1
   distanceFromPlayerChecker: {fileID: 7762898112532298632}
   playerApproacher: {fileID: 879794459643821807}
-  pillowProjectileSpeed: 1
+  pillowProjectileSpeed: 5
   pillowThrowingArcPeak: 3
   animationCurve:
     serializedVersion: 2
@@ -367,10 +367,13 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  pillowTrajectoryEndPoint: {x: 0, y: 0, z: 0}
+  pillowThrowingRange: {x: 0, y: 0, z: 0}
   pillowProjectilePrefab: {fileID: 339540283770652276, guid: 12af78e48e243394a8a7582755632fb6,
     type: 3}
   pillowProjectileHoldingPoint: {fileID: 5338082102556754253}
   enemyRangedAnimationManager: {fileID: 328129024502049579}
+  rangedEnemyAI: {fileID: 2908035468246791382}
 --- !u!114 &328129024502049579
 MonoBehaviour:
   m_ObjectHideFlags: 0
