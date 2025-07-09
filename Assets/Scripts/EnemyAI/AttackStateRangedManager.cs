@@ -1,9 +1,5 @@
-using Cinemachine.Utility;
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI
@@ -18,6 +14,11 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private float pillowThrowingArcPeak = 10f;
 
+        /* This variable is used for calculating the arc angle for the pillow. It is declared here as it is used for checking if the pillow should be moved further
+         * along the X axis
+         */
+        private float xPosToGoTo; 
+
         [Tooltip("This is what we use for calculating the angle of the arc trajectory of the pillow thrown")]
         [SerializeField] private AnimationCurve animationCurve;
 
@@ -27,9 +28,13 @@ namespace SAE.GAD176.P1.EnemyAI
 
         [SerializeField] private Vector3 pillowThrowingRange;
 
+        [SerializeField] private bool isThrowingForward; // serialized for testing
+
         [Header("Objects (Ranged)")]
 
         [SerializeField] private GameObject pillowProjectilePrefab;
+
+        private GameObject pillow;
 
         [Header("Components (Ranged)")]
 
@@ -82,31 +87,42 @@ namespace SAE.GAD176.P1.EnemyAI
 
                 pillowProjectile = PreparePillowProjectile();
                 pillowProjectile.transform.rotation = Quaternion.LookRotation(pillowThrowingRange, Vector3.up);
-                // Less than 0, check for this with if loops in select areas to change direction correctly when looking from behind
+                pillow = pillowProjectile;
 
-                //apply force to move pillow in calculated arc
-                while (Mathf.Round(Vector3.Distance(pillowProjectile.transform.position, pillowTrajectoryEndPoint) * 100f) * 0.01f >= 3f && pillowProjectile != null)
+                while (pillowProjectile != null)
                 {
-                    Debug.Log(Mathf.Round(Vector3.Distance(pillowProjectile.transform.position, pillowTrajectoryEndPoint) * 100f) * 0.01f);
+                    //Debug.Log(Mathf.Round(Vector3.Distance(pillowProjectile.transform.position, pillowTrajectoryEndPoint) * 100f) * 0.01f);
                     Debug.Log("In While Loop for Vector3.Distance in AttackStateRangedManager");
-
 
                     if (pillowProjectile.transform.parent != null)
                     {
                         pillowProjectile.transform.parent = null;
                     }
 
-                    if (pillowProjectile.transform.position.z <= pillowTrajectoryEndPoint.z)
+                    // If fire frontward bool, do this
+                    if (isThrowingForward)
                     {
-                        Debug.Log("We have met the requirements for the if loop in the while loop");
+                        if ((pillowProjectile.transform.position.y - pillowTrajectoryEndPoint.y) > 0.1f && pillowProjectile.transform.position.z <= pillowTrajectoryEndPoint.z)
+                        {
+                            Debug.Log("We have met the requirements for the if loop in the while loop");
 
-                        //AdjustArcSizeByDistance(pillowProjectile);
-                        Vector3 newPos = CalculatePillowThrow(pillowProjectile);
+                            Vector3 newPos = CalculatePillowThrow(pillowProjectile);
 
-                        // Set position to new vector3
-                        pillowProjectile.transform.position = newPos;
+                            pillowProjectile.transform.position = newPos;
+                        }
                     }
+                    else if (!isThrowingForward) // else if fire backward bool, do this
+                    {
+                        if ((pillowProjectile.transform.position.y - pillowTrajectoryEndPoint.y) > 0.1f && pillowProjectile.transform.position.z > -pillowTrajectoryEndPoint.z)
+                        {
+                            Debug.Log("(REVERSE) We have met the requirements for the if loop in the while loop");
 
+                            Vector3 newPos = CalculatePillowThrow(pillowProjectile);
+
+                            pillowProjectile.transform.position = newPos;
+                        }
+                    }
+                    
                     yield return null;
                 }
 
@@ -120,16 +136,25 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private GameObject PreparePillowProjectile()
         {
-            GameObject pillow = Instantiate(pillowProjectilePrefab, new Vector3(pillowProjectileHoldingPoint.position.x, pillowProjectileHoldingPoint.position.y + 2, pillowProjectileHoldingPoint.position.z), Quaternion.Euler(playerTransform.position - transform.position)); // pillowProjectilePrefab, pillowProjectileHoldingPoint.position, Quaternion.Euler(playerTransform.position - transform.localPosition
+            GameObject pillow = Instantiate(pillowProjectilePrefab, new Vector3(pillowProjectileHoldingPoint.position.x, pillowProjectileHoldingPoint.position.y + 0.25f, pillowProjectileHoldingPoint.position.z), Quaternion.Euler(playerTransform.position - transform.position));
             pillowTrajectoryStartPoint = pillow.transform.position;
-            pillowTrajectoryEndPoint = Vector3.zero + new Vector3(playerTransform.localPosition.x, 0, playerTransform.localPosition.z);
+            pillowTrajectoryEndPoint = new Vector3(playerTransform.position.x, 0, playerTransform.position.z);
 
             pillowThrowingRange = playerTransform.position - pillowTrajectoryStartPoint;
 
-            if (pillowThrowingRange.z < 0)
-            {
-                pillowProjectileSpeed = -pillowProjectileSpeed;
-            }
+            //switch (isThrowingForward)
+            //{
+            //    case true:
+            //        Mathf.Abs(pillowProjectileSpeed);
+            //        break;
+            //    case false:
+            //        pillowProjectileSpeed = -pillowProjectileSpeed;
+            //        break;
+            //}
+            //if (pillowThrowingRange.z < 0)
+            //{
+            //    pillowProjectileSpeed = -pillowProjectileSpeed;
+            //}
 
             pillow.transform.parent = pillowProjectileHoldingPoint;
 
@@ -138,61 +163,67 @@ namespace SAE.GAD176.P1.EnemyAI
 
         private Vector3 CalculatePillowThrow(GameObject pillow)
         {
-            // when we have player position, calculate angle for pillow arc
             Debug.Log("while loop in other while loop in RangedAttackCoroutine in AttackStateRangedManager called!");
 
             // Declare local float zPosToGoTo. Initialize by setting its value to the local position of the pillow
             /* added by vale of pillowProjectileSpeed multiplied by Time.deltaTime
              */
-
             float zPosToGoTo = pillow.transform.position.z + pillowProjectileSpeed * Time.deltaTime;
-            float xPosToGoTo = pillow.transform.position.x + (playerTransform.position.x - pillow.transform.position.x) / pillowThrowingRange.x * Time.deltaTime;
 
             /* Declare a new float called normalizedZPosToGoTo. Initliaze it to be the sum of zPosToGoTo subtracted by
              * the z value of pillowTrajectoryStartPoint.z, divided by the value of pillowThrowingRange.z
              */
-
             float normalizedZPosToGoTo = (zPosToGoTo - pillowTrajectoryStartPoint.z) / pillowThrowingRange.z;
-            //Debug.Log(normalizedZPosToGoTo);
-            //float normalizedXPosToGoTo = (xPosToGoTo -  pillowTrajectoryStartPoint.x) / pillowThrowingRange.x;
+
 
             /* Declare a float called normalizedYPosToGoTo. In animation curve, go to horizontal axis and return number which
              * is placed at the point of axis specified in method. Initialize the var with number returned  
              */
-
             float normalizedYPosToGoTo = animationCurve.Evaluate(normalizedZPosToGoTo);
 
             /* Declare new float var called yPosToGoTo. Initialize it to be the normalizedYPosToGoTo value multiplied by the 
              * value in pillowThrowingArcPeak
              */
-
             float yPosToGoTo = pillowTrajectoryStartPoint.y + normalizedYPosToGoTo * pillowThrowingArcPeak;
+
+            if (isThrowingForward)
+            {
+                if (pillow.transform.position.x <= pillowTrajectoryEndPoint.x && !Mathf.Approximately(pillowTrajectoryEndPoint.x, 0))
+                {
+                    xPosToGoTo = pillow.transform.position.x + pillowProjectileSpeed / 2 * Time.deltaTime;
+                }
+
+                return new Vector3(Mathf.Round(xPosToGoTo * 100f) * 0.01f, Mathf.Round(yPosToGoTo * 100f) * 0.01f, Mathf.Round(zPosToGoTo * 100f) * 0.01f);
+            }
+            else
+            {
+                if (pillow.transform.position.x >= pillowTrajectoryEndPoint.x && !Mathf.Approximately(pillowTrajectoryEndPoint.x, 0))
+                {                                              // making the line below divide by the distance between the start and end trajectory worth trying
+                    xPosToGoTo = pillow.transform.position.x + -pillowProjectileSpeed / 2 * Time.deltaTime; // -pillowProjectileSpeed / 2
+                }
+
+                return new Vector3(Mathf.Round(xPosToGoTo * 100f) * 0.01f, Mathf.Round(yPosToGoTo * 100f) * 0.01f, Mathf.Round(zPosToGoTo * 100f) * 0.01f);
+            }
 
             /* Return new Vector3 var consisting of the x value of the end point trying to be reached, the value of
              * yPosToGoTo subtracted by 1 to account for the height added when spawning, to ensure it reaches ground,
              * and the value of zPosToGoTo for the z axis
              */
-
-            return new Vector3(Mathf.Round(xPosToGoTo * 100f) * 0.01f, Mathf.Round(yPosToGoTo * 100f) * 0.01f - 1.5f, Mathf.Round(zPosToGoTo * 100f) * 0.01f);
+            //return new Vector3(Mathf.Round(xPosToGoTo * 100f) * 0.01f, Mathf.Round(yPosToGoTo * 100f) * 0.01f, Mathf.Round(zPosToGoTo * 100f) * 0.01f);
         }
 
-        private void AdjustArcSizeByDistance(GameObject pillow)
-        {
-            if (pillow != null)
-            {
-                float distanceFromPlayerZ = playerTransform.position.z - pillow.transform.position.z;
-                pillowThrowingArcPeak = Mathf.Abs(distanceFromPlayerZ) * pillowThrowingArcPeak;
-            }
-        }
+        //private void AdjustArcSizeByDistance(GameObject pillow)
+        //{
+        //    if (pillow != null)
+        //    {
+        //        float distanceFromPlayerZ = pillowTrajectoryEndPoint.z - pillowTrajectoryStartPoint.z;
+        //        pillowThrowingArcPeak = Mathf.Abs(distanceFromPlayerZ) * pillowThrowingArcPeak;
+        //    }
+        //}
 
         #endregion
 
         #region Unity Methods
-
-        private void Awake()
-        {
-
-        }
 
         private void Update()
         {
@@ -206,11 +237,32 @@ namespace SAE.GAD176.P1.EnemyAI
             if (playerTransform != null && rangedEnemyAI.GetIsAttackStateEnabled())
             {
                 transform.LookAt(playerApproacher.GetPlayerTransform().position, Vector3.up);
-                //pillowProjectileHoldingPoint.LookAt(playerApproacher.GetPlayerTransform().localPosition, Vector3.up);
+
+                switch (transform.rotation.y)
+                {
+                    case > 0:
+                        // Enable fire frontward bool
+                        isThrowingForward = true;
+                        break;
+                    case < 0:
+                        // Disable fire frontward bool
+                        isThrowingForward = false;
+                        break;
+                    default:
+                        break;
+                }
             }
 
-            debugTextPillowPosition.text = "Pillow pos: " + transform.position.ToString();
-            debugTextPillowTrajectoryEndPoint.text = "End point: " + new Vector3(pillowTrajectoryEndPoint.x, 0, pillowTrajectoryEndPoint.z).ToString();
+            if (pillow != null)
+            {
+                debugTextPillowPosition.text = "Pillow pos: " + pillow.transform.position;
+                debugTextPillowTrajectoryEndPoint.text = "End point: " + new Vector3(pillowTrajectoryEndPoint.x, 0, pillowTrajectoryEndPoint.z).ToString();
+            }
+            else
+            {
+                debugTextPillowPosition.text = "Null";
+                debugTextPillowTrajectoryEndPoint.text = "Null";
+            }
         }
 
         #endregion

@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace SAE.GAD176.P1.EnemyAI.PlayerFunctionality
 {
-    public class CollisionWithWeaponManager : MonoBehaviour
+    public class CollisionWithPillowManager : MonoBehaviour
     {
         #region Variables
 

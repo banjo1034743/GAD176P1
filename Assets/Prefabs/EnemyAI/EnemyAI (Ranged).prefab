@@ -332,8 +332,8 @@ MonoBehaviour:
   attackCooldown: 1
   distanceFromPlayerChecker: {fileID: 7762898112532298632}
   playerApproacher: {fileID: 879794459643821807}
-  pillowProjectileSpeed: 5
-  pillowThrowingArcPeak: 0.3
+  pillowProjectileSpeed: 4
+  pillowThrowingArcPeak: 10
   animationCurve:
     serializedVersion: 2
     m_Curve:
@@ -369,6 +369,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   pillowTrajectoryEndPoint: {x: 0, y: 0, z: 0}
   pillowThrowingRange: {x: 0, y: 0, z: 0}
+  isThrowingForward: 0
   pillowProjectilePrefab: {fileID: 339540283770652276, guid: 12af78e48e243394a8a7582755632fb6,
     type: 3}
   pillowProjectileHoldingPoint: {fileID: 5338082102556754253}
