@@ -11,7 +11,7 @@ namespace SAE.GAD176.P1.EnemyAI
         [Header("Data")]
 
         [Tooltip("The rate of speed the AI will move toward the player at")]
-        [SerializeField] private float movementSpeed;
+        [SerializeField] private float approachingSpeed;
 
         [Tooltip("How close the AI needs to be to the player before attack them witn a close-ranged attack")]
         [SerializeField] private float distanceToAttackFrom;
@@ -37,7 +37,7 @@ namespace SAE.GAD176.P1.EnemyAI
 
             if (Vector3.Distance(transform.position, playerTransform.position) > distanceToAttackFrom)
             {
-                transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, movementSpeed * Time.deltaTime);
+                transform.position = Vector3.MoveTowards(transform.position, playerTransform.position, approachingSpeed * Time.deltaTime);
                 RotateTowardsPlayer();
 
                 if (!onGroundChecker.GetOnGroundValue())

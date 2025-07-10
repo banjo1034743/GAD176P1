@@ -339,9 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   turnSpeed: 50
-  enemyRB: {fileID: 0}
   enemyAI: {fileID: 9115038522147109054}
-  onGroundChecker: {fileID: 3600661045683594241}
 --- !u!114 &2615316958505654335
 MonoBehaviour:
   m_ObjectHideFlags: 0

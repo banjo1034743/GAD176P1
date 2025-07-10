@@ -18,15 +18,10 @@ namespace SAE.GAD176.P1.EnemyAI
         // We use this variable to save the current running walk cycle coroutine to then stop whenever regardless of where code is running in it
         private Coroutine currentWalkCycle = null;
 
-        [Header("Components")]
-
-        [SerializeField] private Rigidbody enemyRB; // We use this for moving the AI and accounting for collisions as well
-
         [Header("Scripts")]
 
         [SerializeField] private EnemyAI enemyAI;
 
-        [SerializeField] private OnGroundChecker onGroundChecker;
         #endregion
 
         #region Methods
