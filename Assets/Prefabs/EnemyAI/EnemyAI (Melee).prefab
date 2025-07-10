@@ -279,7 +279,6 @@ GameObject:
   - component: {fileID: 8544139824372022991}
   - component: {fileID: 765800043255450039}
   - component: {fileID: 2768673573482026567}
-  - component: {fileID: 5924823514030375831}
   m_Layer: 0
   m_Name: EnemyAI (Melee)
   m_TagString: Untagged
@@ -340,7 +339,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementSpeed: 1
   turnSpeed: 50
-  enemyRB: {fileID: 5924823514030375831}
+  enemyRB: {fileID: 0}
   enemyAI: {fileID: 9115038522147109054}
   onGroundChecker: {fileID: 3600661045683594241}
 --- !u!114 &2615316958505654335
@@ -498,33 +497,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0347d23273747e541ac02b47952469bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!54 &5924823514030375831
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3438584476614280132}
-  serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 16
-  m_CollisionDetection: 0
 --- !u!1 &8466109881438191257
 GameObject:
   m_ObjectHideFlags: 0
