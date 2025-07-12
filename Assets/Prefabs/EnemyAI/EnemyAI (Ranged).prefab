@@ -295,7 +295,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df056221370483549919189055538203, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementSpeed: 1
+  approachingSpeed: 2.5
   distanceToAttackFrom: 1.5
   playerTransform: {fileID: 0}
   onGroundChecker: {fileID: 0}
